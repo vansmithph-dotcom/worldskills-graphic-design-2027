@@ -112,6 +112,7 @@ test('every_session_is_self_contained_and_uses_its_own_process_infographic', () 
       const svg = fs.readFileSync(visualPath, 'utf8');
       assert.match(svg, /<title\b/i, `${session.id} visual needs a title`);
       assert.match(svg, /<desc\b/i, `${session.id} visual needs a description`);
+      assert.doesNotMatch(svg, /…/, session.id + ' visual should show complete step labels');
       for (const detail of visual.details) assert.ok(svg.includes(detail), `${session.id} infographic should explain: ${detail}`);
       assert.ok(session.worked_example?.description, `${session.id} needs an explanation of its worked visual example`);
       assert.equal(session.worked_example.image, visual.image, `${session.id} worked example must point to its matching process infographic`);
@@ -136,6 +137,8 @@ test('every_session_is_self_contained_and_uses_its_own_process_infographic', () 
         assert.match(visual.steps[1], /слоя/i);
         assert.match(visual.details[1], /слоя/i);
       }
+      if (session.id === '05-prepress') { assert.match(visual.steps[1], /файлы/i); assert.match(visual.details[1], /связи|шрифты/i); }
+      if (session.id === '09-internal-selection') { assert.match(visual.steps[0], /опубликуй/i); assert.match(visual.details[0], /опубликуй/i); }
       if (session.id === '03-logo-typologies') {
         for (const type of ['словесный', 'монограмм', 'изобразительный', 'абстрактный', 'комбинированный', 'эмблем']) {
           assert.ok(visual.details[1].toLowerCase().includes(type), 'logo taxonomy should include ' + type);
