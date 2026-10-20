@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { getSafeModuleId } from '../assets/js/site.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const pages=['index.html','module.html','sources.html','glossary.html','community.html','print.html','timeline.html'];
+test('pages_have_russian_language_and_landmarks',()=>{for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8');assert.match(html,/<html[^>]*lang="ru"/i,page);assert.match(html,/<header[\s>]/i,`${page} header`);assert.match(html,/<nav[\s>]/i,`${page} nav`);assert.match(html,/<main[\s>]/i,`${page} main`);}});
+test('print_page_loads_module_data_renderer',()=>{const html=fs.readFileSync(path.join(root,'print.html'),'utf8'),site=fs.readFileSync(path.join(root,'assets/js/site.js'),'utf8');assert.match(html,/<script[^>]+src="assets\/js\/site\.js"/i);assert.match(html,/id="print-module"/);assert.match(html,/id="print-content"/);assert.match(site,/print:printPage/);});
+test('module_page_explains_lesson_and_module_time',()=>{const site=fs.readFileSync(path.join(root,'assets/js/site.js'),'utf8');assert.match(site,/course-time-note/);assert.match(site,/Минуты у урока показывают длительность короткого занятия/);});
+test('assets_use_relative_paths_and_all_local_links_resolve',()=>{for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8');for(const m of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){const value=m[1];if(/^(?:https?:|mailto:|tel:|#|javascript:)/i.test(value))continue;assert.equal(value.startsWith('/'),false,`${page} root-relative ${value}`);const clean=decodeURIComponent(value.split(/[?#]/)[0]);if(!clean)continue;const target=path.resolve(root,path.dirname(page),clean);assert.ok(target.startsWith(root),`${page} escapes via ${value}`);assert.ok(fs.existsSync(target),`${page} missing ${value}`);}}});
+test('module_route_rejects_unknown_id',()=>{const known=['01-brief','02-indesign'];assert.equal(getSafeModuleId('01-brief',known),'01-brief');assert.equal(getSafeModuleId('../../README',known),null);assert.equal(getSafeModuleId('missing',known),null);});
+test('home_and_timeline_link_course_path_and_render_all_phases',()=>{const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),timelinePage=fs.readFileSync(path.join(root,'timeline.html'),'utf8'),site=fs.readFileSync(path.join(root,'assets/js/site.js'),'utf8'),timeline=JSON.parse(fs.readFileSync(path.join(root,'content/timeline.json'),'utf8'));assert.match(home,/module\.html\?id=/);assert.match(home,/timeline\.html/);assert.match(timelinePage,/ориентир по материалам 2026/i);assert.match(site,/d\.phases\.forEach/);assert.match(site,/p\.label/);assert.equal(timeline.phases.length,4);});

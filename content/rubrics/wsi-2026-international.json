@@ -1,0 +1,40 @@
+{
+  "id": "wsi-2026-international",
+  "title": "Graphic Design Technology — международные веса WSOS 2026",
+  "scope": "WSI",
+  "status": "active-international-reference",
+  "isOfficial": true,
+  "sourceReferences": [
+    "wsos-gdt-2026"
+  ],
+  "version": "2026",
+  "checkedAt": "2026-10-20",
+  "weights": [
+    {
+      "criterion": "Организация работы",
+      "key": "work_organisation",
+      "percent": 10
+    },
+    {
+      "criterion": "Коммуникация",
+      "key": "communication",
+      "percent": 10
+    },
+    {
+      "criterion": "Решение проблем",
+      "key": "problem_solving",
+      "percent": 10
+    },
+    {
+      "criterion": "Инновация, творчество и дизайн",
+      "key": "innovation_creativity_design",
+      "percent": 35
+    },
+    {
+      "criterion": "Техническая сторона и вывод",
+      "key": "technical_output",
+      "percent": 35
+    }
+  ],
+  "note": "Международный Occupational Standard. Эти веса не объединяются с временной казахстанской основой и не являются подтверждённой шкалой Almaty 2027."
+}

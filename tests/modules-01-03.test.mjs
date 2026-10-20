@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const expected={'01-brief':2,'02-indesign':4,'03-illustrator':2};
+test('modules_01_03_have_expected_lesson_counts',()=>{for(const [id,count] of Object.entries(expected)){const data=JSON.parse(fs.readFileSync(path.join(root,`content/modules/${id}.json`),'utf8'));assert.equal(data.id,id);assert.equal(data.lessons.length,count);}});
+test('every_lesson_has_scaffold_and_rubric',()=>{for(const id of Object.keys(expected)){const data=JSON.parse(fs.readFileSync(path.join(root,`content/modules/${id}.json`),'utf8'));for(const lesson of data.lessons){for(const key of ['id','title','minutes','goal','explanation','worked_example','guided_practice','independent_brief','quiz','criteria','common_errors','sources','revisit'])assert.ok(key in lesson,`${id}/${lesson.id} missing ${key}`);assert.ok(Array.isArray(lesson.criteria),`${lesson.id} criteria must be a list`);assert.ok(lesson.criteria.length>=3);assert.ok(lesson.guided_practice);assert.ok(lesson.independent_brief);}}});
+test('every_lesson_references_active_source_and_has_alt_text',()=>{const sources=JSON.parse(fs.readFileSync(path.join(root,'content/sources.json'),'utf8')).sources;for(const id of Object.keys(expected)){const data=JSON.parse(fs.readFileSync(path.join(root,`content/modules/${id}.json`),'utf8'));for(const lesson of data.lessons){assert.ok(lesson.sources.length,`${lesson.id} has no source`);for(const ref of lesson.sources)assert.equal(sources.find(s=>s.id===ref)?.status,'active',`${lesson.id}: source ${ref} is not active`);assert.ok(lesson.worked_example.alt,`${lesson.id} example has no alt text`);assert.equal(lesson.quiz.length>=2&&lesson.quiz.length<=3,true,`${lesson.id} needs 2–3 checks`);}}});
