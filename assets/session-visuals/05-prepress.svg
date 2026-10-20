@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc">
   <title id="title">Цвет, вылеты и печатный PDF — порядок действий</title>
-  <desc id="desc">Инфографика занятия «Цвет, вылеты и печатный PDF». Сверь формат и цвет: Сверь размер, профиль, вылет и формат с текущим заданием. Настрой вылеты и безопасные зоны: Проверь связи, шрифты, разрешение и технологические слои. Проверь PDF по требованиям: Экспортируй нужный PDF, открой его и проверь все страницы. Этап 1: Сверь формат и цвет. Сверь размер, профиль, вылет и формат с текущим заданием. Этап 2: Настрой вылеты и безопасные зоны. Проверь связи, шрифты, разрешение и технологические слои. Этап 3: Проверь PDF по требованиям. Экспортируй нужный PDF, открой его и проверь все страницы. Сначала выполни каждый этап по порядку; переходи к следующему только после короткой проверки предыдущего.</desc>
+  <desc id="desc">Инфографика занятия «Цвет, вылеты и печатный PDF». Сверь формат и цвет: Сверь размер, профиль, вылет и формат с текущим заданием. Проверь файлы и печать: Проверь связи, шрифты, разрешение и технологические слои. Проверь PDF по требованиям: Экспортируй нужный PDF, открой его и проверь все страницы. Этап 1: Сверь формат и цвет. Сверь размер, профиль, вылет и формат с текущим заданием. Этап 2: Проверь файлы и печать. Проверь связи, шрифты, разрешение и технологические слои. Этап 3: Проверь PDF по требованиям. Экспортируй нужный PDF, открой его и проверь все страницы. Сначала выполни каждый этап по порядку; переходи к следующему только после короткой проверки предыдущего.</desc>
   <style>
     .bg{fill:#f7f4ed}.eyebrow{font:700 13px Arial,sans-serif;letter-spacing:2px;fill:#256b62}.title{font:700 27px Arial,sans-serif;fill:#172c38}.step-card{fill:#fff;stroke:#d6d5cc;stroke-width:2}.step-number{font:700 16px Arial,sans-serif;fill:#fff}.step-label{font:700 18px Arial,sans-serif;fill:#172c38}.step-detail{font:400 14px Arial,sans-serif;fill:#42535b}.micro{font:700 9px Arial,sans-serif;letter-spacing:1px;fill:#647078}.arrow{stroke:#79848a;stroke-width:3;stroke-linecap:round}.arrow-head{fill:none;stroke:#79848a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.caption{font:400 15px Arial,sans-serif;fill:#42535b}
   </style>
@@ -18,13 +18,12 @@
 <text x="260" y="335" text-anchor="middle" class="step-detail">формат с текущим заданием.</text>
       <text x="260" y="386" text-anchor="middle" class="micro">СДЕЛАЙ · ПРОВЕРЬ · ПРОДОЛЖАЙ</text>
     </g><path d="M 435 280 H 463" class="arrow"/><path d="M 451 270 L 463 280 L 451 290" class="arrow-head"/>
-<g aria-label="Этап 2: Настрой вылеты и безопасные зоны Проверь связи, шрифты, разрешение и технологические слои.">
+<g aria-label="Этап 2: Проверь файлы и печать Проверь связи, шрифты, разрешение и технологические слои.">
       <rect x="475" y="158" width="330" height="250" rx="18" class="step-card"/>
       <path d="M 493 158 H 787 Q 805 158 805 176 V 168 H 475 V 176 Q 475 158 493 158 Z" fill="#cb6a43"/>
       <circle cx="517" cy="204" r="19" fill="#cb6a43"/>
       <text x="517" y="211" text-anchor="middle" class="step-number">2</text>
-      <text x="640" y="248" text-anchor="middle" class="step-label">Настрой вылеты и</text>
-<text x="640" y="276" text-anchor="middle" class="step-label">безопасные зоны</text>
+      <text x="640" y="248" text-anchor="middle" class="step-label">Проверь файлы и печать</text>
       <text x="640" y="316" text-anchor="middle" class="step-detail">Проверь связи, шрифты, разрешение и</text>
 <text x="640" y="335" text-anchor="middle" class="step-detail">технологические слои.</text>
       <text x="640" y="386" text-anchor="middle" class="micro">СДЕЛАЙ · ПРОВЕРЬ · ПРОДОЛЖАЙ</text>
