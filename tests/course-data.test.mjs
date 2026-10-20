@@ -21,10 +21,11 @@ test('source_records_have_scope_status_and_safe_access_fields', () => {
   const { sources } = readJson('content/sources.json');
   assert.ok(sources.length >= 8);
   for (const source of sources) {
-    for (const key of ['id', 'title', 'publisher', 'version', 'checkedAt', 'status', 'scope', 'modules', 'access', 'url', 'reference']) assert.ok(key in source, `${source.id} missing ${key}`);
+    for (const key of ['id', 'title', 'publisher', 'version', 'checkedAt', 'status', 'scope', 'modules', 'access', 'url', 'reference', 'evidenceType']) assert.ok(key in source, `${source.id} missing ${key}`);
     assert.match(source.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(['active', 'check', 'replaced', 'archive'].includes(source.status));
-    assert.ok(['Kazakhstan', 'WSI', 'Adobe', 'research', 'practice'].includes(source.scope));
+    assert.ok(['Kazakhstan', 'WSI', 'Adobe', 'academic', 'education', 'accessibility', 'practice'].includes(source.scope));
+    if (source.evidenceType.startsWith('peer-reviewed-') || ['design-textbook', 'design-practitioner-text'].includes(source.evidenceType)) assert.ok(source.accessNote?.length > 20, `${source.id} needs an access note`);
     if (source.access === 'external') { assert.ok(source.url); assert.equal(source.reference, null); }
     else { assert.equal(source.access, 'local-reference'); assert.equal(source.url, null); assert.ok(source.reference); }
   }

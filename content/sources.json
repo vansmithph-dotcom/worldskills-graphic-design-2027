@@ -1,20 +1,551 @@
 {
   "sources": [
-    {"id":"wsos-gdt-2026","title":"Graphic Design Technology — WorldSkills Occupational Standard 2026","publisher":"WorldSkills International","version":"2026; last updated 2026-03-19","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["01-brief","02-indesign","03-illustrator","04-photoshop","05-print-production","06-digital-design","07-quality-handoff","08-competition-english","09-exams-selection"],"access":"external","url":"https://worldskills.org/what/projects/wsos/2026/events/611/skills/2448/","reference":null,"use":"Международная карта навыков: организация 10%, коммуникация 10%, решение проблем 10%, дизайн/творчество 35%, техническая сторона и вывод 35%. Не местная схема оценки."},
-    {"id":"wsos-index","title":"WorldSkills Occupational Standards","publisher":"WorldSkills International","version":"официальная обзорная страница; пересматривать при обновлении","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["01-brief","09-exams-selection"],"access":"external","url":"https://worldskills.org/what/projects/wsos/","reference":null,"use":"Объясняет назначение и периодическое обновление международных стандартов."},
-    {"id":"od01-constitution-current","title":"OD01 — Constitution","publisher":"WorldSkills International","version":"3.10, 2026-09-21","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["01-brief","08-competition-english","09-exams-selection"],"access":"external","url":"https://api.worldskills.org/resources/download/3747/35003/36100?l=en","reference":null,"use":"Общий контекст WorldSkills; не задаёт спецификацию Graphic Design Technology Almaty 2027."},
-    {"id":"od03-rules-current","title":"OD03 — Competition Rules","publisher":"WorldSkills International","version":"11.1, 2026-09-21","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["01-brief","07-quality-handoff","08-competition-english","09-exams-selection"],"access":"external","url":"https://api.worldskills.org/resources/download/3745/34979/36045?l=en","reference":null,"use":"Общие международные правила. Местные регламенты и официальные инструкции конкретного события имеют отдельный уровень."},
-    {"id":"od04-ethics-current","title":"OD04 — Code of Ethics and Conduct","publisher":"WorldSkills International","version":"2.2","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["01-brief","07-quality-handoff","08-competition-english","09-exams-selection"],"access":"external","url":"https://api.worldskills.org/resources/download/3746/9002/9912?l=en","reference":null,"use":"Этика, уважение и корректное поведение в конкурсной среде."},
-    {"id":"adobe-indesign-release","title":"InDesign desktop release notes","publisher":"Adobe","version":"September 2026, 21.6","checkedAt":"2026-10-20","status":"active","scope":"Adobe","modules":["02-indesign","05-print-production","06-digital-design","07-quality-handoff"],"access":"external","url":"https://helpx.adobe.com/indesign/desktop/whats-new/release-notes.html","reference":null,"use":"Для проверки актуальных названий и расположения команд; локальную установленную версию перед учебой сверить в About InDesign."},
-    {"id":"adobe-illustrator-release","title":"Illustrator desktop release notes","publisher":"Adobe","version":"August 2026, 30.8","checkedAt":"2026-10-20","status":"active","scope":"Adobe","modules":["03-illustrator","05-print-production","06-digital-design"],"access":"external","url":"https://helpx.adobe.com/illustrator/desktop/new-features/release-notes.html","reference":null,"use":"Официальная история выпусков; упражнения используют стабильные базовые инструменты. Проверить версию в аудитории перед уроком."},
-    {"id":"adobe-photoshop-release","title":"Photoshop desktop release notes","publisher":"Adobe","version":"September 2026, 27.11","checkedAt":"2026-10-20","status":"active","scope":"Adobe","modules":["04-photoshop","05-print-production","06-digital-design"],"access":"external","url":"https://helpx.adobe.com/photoshop/desktop/whats-new/photoshop-on-desktop-release-notes.html","reference":null,"use":"Официальная история выпусков; в занятиях не требуется новая функция. Проверить локальную версию в About Photoshop."},
-    {"id":"wcag22","title":"Web Content Accessibility Guidelines (WCAG) 2.2","publisher":"W3C","version":"Recommendation, 2024-12-12","checkedAt":"2026-10-20","status":"active","scope":"research","modules":["06-digital-design","07-quality-handoff"],"access":"external","url":"https://www.w3.org/TR/WCAG22/","reference":null,"use":"Международный справочный источник для проверки контраста и доступности цифрового материала; не регламент конкурса."},
-    {"id":"udl-3","title":"UDL Guidelines 3.0","publisher":"CAST","version":"3.0, 2024","checkedAt":"2026-10-20","status":"active","scope":"research","modules":["01-brief","02-indesign","08-competition-english"],"access":"external","url":"https://udlguidelines.cast.org/","reference":null,"use":"Методический ориентир: короткие шаги, несколько форм представления, ясные цели и обратная связь."},
-    {"id":"kz-wsk-2026-il40","title":"WSK2026_ИЛ_40_Графический дизайн.xlsx","publisher":"Предоставленный пользователем материал WorldSkills Kazakhstan","version":"2026; локальная копия — перечень инфраструктуры/инструментов","checkedAt":"2026-10-20","status":"active","scope":"Kazakhstan","modules":["01-brief","07-quality-handoff"],"access":"local-reference","url":null,"reference":"WSK2026_ИЛ _40_Графический дизайн.xlsx","use":"Инвентарный ориентир для доступного ПО/оборудования; содержание не трактуется как критерии конкурса или обязательное оснащение Almaty 2027."},
-    {"id":"kz-wsk-2026-to04","title":"WSK2026_ТО_04_Графический дизайн.doc","publisher":"Предоставленный пользователем материал WorldSkills Kazakhstan","version":"2026; содержимое требует повторной проверки/конвертации","checkedAt":"2026-10-20","status":"check","scope":"Kazakhstan","modules":[],"access":"local-reference","url":null,"reference":"WSK2026_ТО_04_Графический дизайн.doc","use":"Старая бинарная копия Word .doc не извлеклась надёжно в текущей среде; не используется как проверенное основание уроков. Пересмотреть после конвертации или доступа к читаемой копии."},
-    {"id":"kz-gdt-2026-proposed","title":"WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования","publisher":"Предоставленный пользователем материал","version":"2026; проектное предложение, не опубликованный официальный Test Project","checkedAt":"2026-10-20","status":"active","scope":"practice","modules":["05-print-production","06-digital-design","09-exams-selection"],"access":"local-reference","url":null,"reference":"WS_KZ_GDT_2026.docx","use":"Идеи для учебных заданий по айдентике, редакционному макету и упаковке. Любое производное упражнение маркируется «учебный проект», не официальное задание."},
-    {"id":"local-od01-old","title":"Локальная копия OD01 — Constitution","publisher":"Предоставленный пользователем материал WorldSkills International","version":"3.6; заменена редакцией 3.10","checkedAt":"2026-10-20","status":"replaced","scope":"WSI","modules":[],"access":"local-reference","url":null,"reference":"рус_WSI_OD01_constitution_v3.6_EN.docx","use":"Для справки; курс ссылается на актуальную официальную редакцию 3.10."},
-    {"id":"local-od03-old","title":"Локальная копия OD03 — Competition Rules","publisher":"Предоставленный пользователем материал WorldSkills International","version":"8.1; заменена редакцией 11.1","checkedAt":"2026-10-20","status":"replaced","scope":"WSI","modules":[],"access":"local-reference","url":null,"reference":"рус_WSI_OD03_competition_rules_v8.1_EN (1).docx","use":"Для справки; курс ссылается на актуальную официальную редакцию 11.1."},
-    {"id":"local-od04","title":"Локальная копия OD04 — Code of Ethics and Conduct","publisher":"Предоставленный пользователем материал WorldSkills International","version":"2.2; сверена с актуальной официальной публикацией","checkedAt":"2026-10-20","status":"active","scope":"WSI","modules":["08-competition-english"],"access":"local-reference","url":null,"reference":"рус_WSI_OD04_code_of_ethics_and_conduct_v2.2_EN.docx","use":"Справочная копия; публичный ресурс ссылается на официальную страницу и не распространяет документ."}
+    {
+      "id": "wsos-gdt-2026",
+      "title": "Graphic Design Technology — WorldSkills Occupational Standard 2026",
+      "publisher": "WorldSkills International",
+      "version": "2026; last updated 2026-03-19",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "01-brief",
+        "02-indesign",
+        "03-illustrator",
+        "04-photoshop",
+        "05-print-production",
+        "06-digital-design",
+        "07-quality-handoff",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://worldskills.org/what/projects/wsos/2026/events/611/skills/2448/",
+      "reference": null,
+      "use": "Международная карта навыков: организация 10%, коммуникация 10%, решение проблем 10%, дизайн/творчество 35%, техническая сторона и вывод 35%. Не местная схема оценки.",
+      "evidenceType": "official-competition-document",
+      "accessNote": "Публичная официальная страница WSI; доступ к полному стандарту зависит от публикации на странице. Использовать как международный ориентир, не как местную оценку."
+    },
+    {
+      "id": "wsos-index",
+      "title": "WorldSkills Occupational Standards",
+      "publisher": "WorldSkills International",
+      "version": "официальная обзорная страница; пересматривать при обновлении",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "01-brief",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://worldskills.org/what/projects/wsos/",
+      "reference": null,
+      "use": "Объясняет назначение и периодическое обновление международных стандартов.",
+      "evidenceType": "official-competition-document",
+      "accessNote": "Открытая обзорная страница WorldSkills International; ссылки на полные стандарты публикуются отдельно."
+    },
+    {
+      "id": "od01-constitution-current",
+      "title": "OD01 — Constitution",
+      "publisher": "WorldSkills International",
+      "version": "3.10, 2026-09-21",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "01-brief",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://api.worldskills.org/resources/download/3747/35003/36100?l=en",
+      "reference": null,
+      "use": "Общий контекст WorldSkills; не задаёт спецификацию Graphic Design Technology Almaty 2027.",
+      "evidenceType": "official-competition-document",
+      "accessNote": "Официальный файл WSI доступен по ссылке; документ опубликован на английском языке. Внешнее чтение не требуется для выполнения учебных заданий."
+    },
+    {
+      "id": "od03-rules-current",
+      "title": "OD03 — Competition Rules",
+      "publisher": "WorldSkills International",
+      "version": "11.1, 2026-09-21",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "01-brief",
+        "07-quality-handoff",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://api.worldskills.org/resources/download/3745/34979/36045?l=en",
+      "reference": null,
+      "use": "Общие международные правила. Местные регламенты и официальные инструкции конкретного события имеют отдельный уровень.",
+      "evidenceType": "official-competition-document",
+      "accessNote": "Официальный файл WSI доступен по ссылке; документ опубликован на английском языке. Использовать общие правила, а локальные условия подтверждать отдельно."
+    },
+    {
+      "id": "od04-ethics-current",
+      "title": "OD04 — Code of Ethics and Conduct",
+      "publisher": "WorldSkills International",
+      "version": "2.2",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "01-brief",
+        "07-quality-handoff",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://api.worldskills.org/resources/download/3746/9002/9912?l=en",
+      "reference": null,
+      "use": "Этика, уважение и корректное поведение в конкурсной среде.",
+      "evidenceType": "official-competition-document",
+      "accessNote": "Официальный файл WSI доступен по ссылке; документ опубликован на английском языке. Внешнее чтение не требуется для выполнения учебных заданий."
+    },
+    {
+      "id": "adobe-indesign-release",
+      "title": "InDesign desktop release notes",
+      "publisher": "Adobe",
+      "version": "September 2026, 21.6",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "Adobe",
+      "modules": [
+        "02-indesign",
+        "05-print-production",
+        "06-digital-design",
+        "07-quality-handoff"
+      ],
+      "access": "external",
+      "url": "https://helpx.adobe.com/indesign/desktop/whats-new/release-notes.html",
+      "reference": null,
+      "use": "Для проверки актуальных названий и расположения команд; локальную установленную версию перед учебой сверить в About InDesign.",
+      "evidenceType": "official-software-documentation",
+      "accessNote": "Открытые официальные заметки Adobe; список функций может меняться при обновлении приложения. Проверяйте установленную версию отдельно."
+    },
+    {
+      "id": "adobe-illustrator-release",
+      "title": "Illustrator desktop release notes",
+      "publisher": "Adobe",
+      "version": "August 2026, 30.8",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "Adobe",
+      "modules": [
+        "03-illustrator",
+        "05-print-production",
+        "06-digital-design"
+      ],
+      "access": "external",
+      "url": "https://helpx.adobe.com/illustrator/desktop/new-features/release-notes.html",
+      "reference": null,
+      "use": "Официальная история выпусков; упражнения используют стабильные базовые инструменты. Проверить версию в аудитории перед занятием.",
+      "evidenceType": "official-software-documentation",
+      "accessNote": "Открытые официальные заметки Adobe; список функций может меняться при обновлении приложения. Проверяйте установленную версию отдельно."
+    },
+    {
+      "id": "adobe-photoshop-release",
+      "title": "Photoshop desktop release notes",
+      "publisher": "Adobe",
+      "version": "September 2026, 27.11",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "Adobe",
+      "modules": [
+        "04-photoshop",
+        "05-print-production",
+        "06-digital-design"
+      ],
+      "access": "external",
+      "url": "https://helpx.adobe.com/photoshop/desktop/whats-new/photoshop-on-desktop-release-notes.html",
+      "reference": null,
+      "use": "Официальная история выпусков; в занятиях не требуется новая функция. Проверить локальную версию в About Photoshop.",
+      "evidenceType": "official-software-documentation",
+      "accessNote": "Открытые официальные заметки Adobe; список функций может меняться при обновлении приложения. Проверяйте установленную версию отдельно."
+    },
+    {
+      "id": "wcag22",
+      "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+      "publisher": "W3C",
+      "version": "Recommendation, 2024-12-12",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "accessibility",
+      "modules": [
+        "06-digital-design",
+        "07-quality-handoff"
+      ],
+      "access": "external",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "reference": null,
+      "use": "Международный справочный источник для проверки контраста и доступности цифрового материала; не регламент конкурса.",
+      "evidenceType": "accessibility-standard",
+      "accessNote": "Открытая нормативная публикация W3C с полным текстом критериев."
+    },
+    {
+      "id": "udl-3",
+      "title": "UDL Guidelines 3.0",
+      "publisher": "CAST",
+      "version": "3.0, 2024",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "education",
+      "modules": [
+        "01-brief",
+        "02-indesign",
+        "08-competition-english"
+      ],
+      "access": "external",
+      "url": "https://udlguidelines.cast.org/",
+      "reference": null,
+      "use": "Методический ориентир: короткие шаги, несколько форм представления, ясные цели и обратная связь.",
+      "evidenceType": "evidence-informed-education-guideline",
+      "accessNote": "Открытые рекомендации CAST; это рамка проектирования обучения, а не конкурсный документ."
+    },
+    {
+      "id": "kz-wsk-2026-il40",
+      "title": "WSK2026_ИЛ_40_Графический дизайн.xlsx",
+      "publisher": "Предоставленный пользователем материал WorldSkills Kazakhstan",
+      "version": "2026; локальная копия — перечень инфраструктуры/инструментов",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "Kazakhstan",
+      "modules": [
+        "01-brief",
+        "07-quality-handoff"
+      ],
+      "access": "local-reference",
+      "url": null,
+      "reference": "WSK2026_ИЛ _40_Графический дизайн.xlsx",
+      "use": "Инвентарный ориентир для доступного ПО/оборудования; содержание не трактуется как критерии конкурса или обязательное оснащение Almaty 2027.",
+      "evidenceType": "local-user-document"
+    },
+    {
+      "id": "kz-wsk-2026-to04",
+      "title": "WSK2026_ТО_04_Графический дизайн.doc",
+      "publisher": "Предоставленный пользователем материал WorldSkills Kazakhstan",
+      "version": "2026; содержимое требует повторной проверки/конвертации",
+      "checkedAt": "2026-10-20",
+      "status": "check",
+      "scope": "Kazakhstan",
+      "modules": [],
+      "access": "local-reference",
+      "url": null,
+      "reference": "WSK2026_ТО_04_Графический дизайн.doc",
+      "use": "Старая бинарная копия Word .doc не извлеклась надёжно в текущей среде; не используется как проверенное основание занятий. Пересмотреть после конвертации или доступа к читаемой копии.",
+      "evidenceType": "local-user-document"
+    },
+    {
+      "id": "kz-gdt-2026-proposed",
+      "title": "WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования",
+      "publisher": "Предоставленный пользователем материал",
+      "version": "2026; проектное предложение, не опубликованный официальный Test Project",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "practice",
+      "modules": [
+        "05-print-production",
+        "06-digital-design",
+        "09-exams-selection"
+      ],
+      "access": "local-reference",
+      "url": null,
+      "reference": "WS_KZ_GDT_2026.docx",
+      "use": "Идеи для учебных заданий по айдентике, редакционному макету и упаковке. Любое производное упражнение маркируется «учебный проект», не официальное задание.",
+      "evidenceType": "proposed-practice-project"
+    },
+    {
+      "id": "local-od01-old",
+      "title": "Локальная копия OD01 — Constitution",
+      "publisher": "Предоставленный пользователем материал WorldSkills International",
+      "version": "3.6; заменена редакцией 3.10",
+      "checkedAt": "2026-10-20",
+      "status": "replaced",
+      "scope": "WSI",
+      "modules": [],
+      "access": "local-reference",
+      "url": null,
+      "reference": "рус_WSI_OD01_constitution_v3.6_EN.docx",
+      "use": "Для справки; курс ссылается на актуальную официальную редакцию 3.10.",
+      "evidenceType": "local-user-document"
+    },
+    {
+      "id": "local-od03-old",
+      "title": "Локальная копия OD03 — Competition Rules",
+      "publisher": "Предоставленный пользователем материал WorldSkills International",
+      "version": "8.1; заменена редакцией 11.1",
+      "checkedAt": "2026-10-20",
+      "status": "replaced",
+      "scope": "WSI",
+      "modules": [],
+      "access": "local-reference",
+      "url": null,
+      "reference": "рус_WSI_OD03_competition_rules_v8.1_EN (1).docx",
+      "use": "Для справки; курс ссылается на актуальную официальную редакцию 11.1.",
+      "evidenceType": "local-user-document"
+    },
+    {
+      "id": "local-od04",
+      "title": "Локальная копия OD04 — Code of Ethics and Conduct",
+      "publisher": "Предоставленный пользователем материал WorldSkills International",
+      "version": "2.2; сверена с актуальной официальной публикацией",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "WSI",
+      "modules": [
+        "08-competition-english"
+      ],
+      "access": "local-reference",
+      "url": null,
+      "reference": "рус_WSI_OD04_code_of_ethics_and_conduct_v2.2_EN.docx",
+      "use": "Справочная копия; публичный ресурс ссылается на официальную страницу и не распространяет документ.",
+      "evidenceType": "local-user-document"
+    },
+    {
+      "id": "semiotics-icons-metaphors-2023",
+      "title": "Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity",
+      "publisher": "Public Journal of Semiotics",
+      "version": "2023, volume 10 (2), peer-reviewed article",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator"
+      ],
+      "access": "external",
+      "url": "https://journals.lub.lu.se/pjos/article/view/24762",
+      "reference": null,
+      "use": "Методическая основа для различения изображения, диаграммы и метафоры; интерпретация знака зависит от культурного опыта. Использовать как способ постановки вопросов, не как универсальный словарь символов.",
+      "evidenceType": "peer-reviewed-theoretical-article",
+      "accessNote": "Полнота доступа и статус текста сверены по странице издателя; подробности указаны в карточке. Не требовать чтения за пределами доступного текста."
+    },
+    {
+      "id": "symbol-semantics-design-studies-2026",
+      "title": "Effects of semantic information of symbols on cultural product design expression",
+      "publisher": "Design Studies / Elsevier",
+      "version": "2026-05, volume 104, article 101400",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator",
+        "05-print-production"
+      ],
+      "access": "external",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0142694X26000220",
+      "reference": null,
+      "use": "Исследование передачи семантики культурных знаков в дизайне; полезно для обучения отображать связи формы и смысла и проверять их на аудитории. Выводы исследования не являются универсальными значениями каждого знака.",
+      "evidenceType": "peer-reviewed-study",
+      "accessNote": "Страница статьи на ScienceDirect открыта; полный текст может требовать подписку или доступ через организацию. Статья дана для углублённого чтения преподавателю; занятия и практики не зависят от получения полного текста."
+    },
+    {
+      "id": "color-perception-cognition-2023",
+      "title": "The Development of Color Perception and Cognition",
+      "publisher": "Annual Review of Psychology",
+      "version": "2023, volume 74, pages 87–111; review article; DOI 10.1146/annurev-psych-032720-040512",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator",
+        "06-digital-design"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1146/annurev-psych-032720-040512",
+      "reference": null,
+      "use": "Рецензируемый обзор восприятия, категоризации и ассоциаций цвета. Используется для объяснения роли контекста, опыта и ограничений цветовых обобщений; не задаёт универсальную таблицу «цвет — значение».",
+      "evidenceType": "peer-reviewed-review",
+      "accessNote": "Полный текст издателя доступен по DOI в открытом доступе; перед следующим циклом перепроверить статус и файл."
+    },
+    {
+      "id": "logo-identity-erjansola-2021",
+      "title": "From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger",
+      "publisher": "Journal of Brand Management / Springer Nature",
+      "version": "2021, volume 28, pages 241–253; open access; DOI 10.1057/s41262-020-00223-5",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1057/s41262-020-00223-5",
+      "reference": null,
+      "use": "Открытое исследование о том, как визуальные признаки и опыт сообщества формируют ассоциации вокруг нового логотипа. Полезно для проверки айдентики с аудиторией; выборка одного университета ограничивает прямое обобщение.",
+      "evidenceType": "peer-reviewed-study",
+      "accessNote": "Издатель помечает статью как open access и предоставляет полный текст/PDF."
+    },
+    {
+      "id": "logo-naturalness-chen-2023",
+      "title": "The visual naturalness effect: Impact of natural logos on brand personality perception",
+      "publisher": "International Journal of Consumer Studies / Wiley",
+      "version": "2023, volume 47, issue 4, pages 1351–1363; open access; DOI 10.1111/ijcs.12912",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1111/ijcs.12912",
+      "reference": null,
+      "use": "Четыре эксперимента о связи естественности изображения логотипа и восприятия личности бренда. Подходит как пример проверяемой гипотезы; не превращать результат конкретных стимулов и продуктовых категорий в правило для всех брендов.",
+      "evidenceType": "peer-reviewed-study",
+      "accessNote": "Страница издателя помечает статью как open access и содержит полный текст."
+    },
+    {
+      "id": "logo-selection-henderson-cote-1998",
+      "title": "Guidelines for Selecting or Modifying Logos",
+      "publisher": "Journal of Marketing / SAGE",
+      "version": "1998, volume 62, issue 2, pages 14–30; DOI 10.1177/002224299806200202",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "03-illustrator"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1177/002224299806200202",
+      "reference": null,
+      "use": "Классическое эмпирическое исследование распознавания и характеристик логотипов. Использовать как историческую исследовательскую рамку, а не как готовый современный рецепт или конкурсный критерий.",
+      "evidenceType": "peer-reviewed-study",
+      "accessNote": "У издателя доступны библиографические данные и аннотация; полный текст может требовать подписки. Не является обязательным чтением для студентов."
+    },
+    {
+      "id": "design-studio-pedagogy-sawyer-2017",
+      "title": "Teaching creativity in art and design studio classes: A systematic literature review",
+      "publisher": "Educational Research Review / Elsevier",
+      "version": "2017, volume 22, pages 99–113; systematic review of 65 peer-reviewed articles; DOI 10.1016/j.edurev.2017.07.002",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1016/j.edurev.2017.07.002",
+      "reference": null,
+      "use": "Систематический обзор эмпирических исследований преподавания творчества в художественных и дизайн-студиях; обосновывает работу через проект, итерации, наставничество и формирующую обратную связь. Возраст источника и широкий состав дисциплин отмечены.",
+      "evidenceType": "peer-reviewed-review",
+      "accessNote": "Издательская аннотация открыта; полный текст может быть ограничен подпиской. Использовать для педагогической структуры, не как описание WSI."
+    },
+    {
+      "id": "spacing-practice-classroom-meta-2025",
+      "title": "The Distributed Practice Effect on Classroom Learning: A Meta-Analytic Review of Applied Research",
+      "publisher": "Behavioral Sciences / MDPI",
+      "version": "2025, volume 15, issue 6, article 771; DOI 10.3390/bs15060771",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "02-indesign",
+        "03-illustrator",
+        "04-photoshop",
+        "05-print-production",
+        "06-digital-design",
+        "07-quality-handoff",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.3390/bs15060771",
+      "reference": null,
+      "use": "Открытый метаанализ исследований распределённой практики в классах. Поддерживает возвращение к навыкам в разных занятиях вместо одного длинного блока; выборка из школьных исследований не задаёт точный интервал для графического дизайна.",
+      "evidenceType": "peer-reviewed-review",
+      "accessNote": "Полный текст и данные статьи доступны через PubMed Central по ссылке издателя. Не является обязательным чтением для студентов."
+    },
+    {
+      "id": "retrieval-practice-rowland-2014",
+      "title": "The effect of testing versus restudy on retention: A meta-analytic review of the testing effect",
+      "publisher": "Psychological Bulletin / American Psychological Association",
+      "version": "2014, volume 140, issue 6, pages 1432–1463; DOI 10.1037/a0037559",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "08-competition-english",
+        "09-exams-selection"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1037/a0037559",
+      "reference": null,
+      "use": "Метаанализ сравнивает тестирование и повторное изучение для сохранения материала. Поддерживает короткое низкорисковое извлечение из памяти с обратной связью; не оправдывает отборочный порог и не измеряет весь практический навык дизайнера.",
+      "evidenceType": "peer-reviewed-review",
+      "accessNote": "Библиографическая запись и аннотация открыты в PubMed; полный текст издателя может требовать подписку. Студентам достаточно встроенной практики, статья дана для проверки методики."
+    },
+    {
+      "id": "packaging-visual-complexity-baek-2023",
+      "title": "Visual complexity = hedonic? Effects of visually complex packages on consumer perceptions and evaluations of products",
+      "publisher": "Journal of Retailing and Consumer Services / Elsevier",
+      "version": "2023, volume 74, article 103435; DOI 10.1016/j.jretconser.2023.103435",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "05-print-production"
+      ],
+      "access": "external",
+      "url": "https://doi.org/10.1016/j.jretconser.2023.103435",
+      "reference": null,
+      "use": "Пять эмпирических исследований о том, как сложность графики упаковки взаимодействует с типом продукта. Пример влияния контекста; результат не задаёт универсальную формулу привлекательности упаковки.",
+      "evidenceType": "peer-reviewed-study",
+      "accessNote": "У издателя открыты метаданные и аннотация; полный текст ограничен подпиской. Дополнительное чтение преподавателя, не обязательное чтение студентов."
+    },
+    {
+      "id": "thinking-with-type-2024",
+      "title": "Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students",
+      "publisher": "Princeton Architectural Press",
+      "version": "3rd revised and expanded edition, 2024; ISBN 9781797226828",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "02-indesign",
+        "03-illustrator",
+        "06-digital-design"
+      ],
+      "access": "external",
+      "url": "https://papress.com/products/thinking-with-type-3-edition",
+      "reference": null,
+      "use": "Актуальная учебная книга по типографике, гарнитурам, интервалам, сетке, читаемости, доступности и системам письма. Обозначена как учебная книга, не как рецензируемое исследование.",
+      "evidenceType": "design-textbook",
+      "accessNote": "Издательская страница с библиографией и описанием открыта; полный текст — книга, требуется библиотечный/покупной доступ. В курс включаются собственные оригинальные объяснения."
+    },
+    {
+      "id": "designing-brand-identity-2024",
+      "title": "Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding",
+      "publisher": "Wiley",
+      "version": "6th edition, January 2024; ISBN 978-1-119-98482-5",
+      "checkedAt": "2026-10-20",
+      "status": "active",
+      "scope": "academic",
+      "modules": [
+        "01-brief",
+        "03-illustrator",
+        "05-print-production",
+        "06-digital-design"
+      ],
+      "access": "external",
+      "url": "https://www.wiley.com/en-us/designing-brand-identity-a-comprehensive-guide-to-the-world-of-brands-and-branding-6th-edition-p-9781119984825",
+      "reference": null,
+      "use": "Профессиональная учебная книга для системного процесса брендинга, стратегии, дизайна идентичности и внедрения. Справочный учебник, не рецензируемое исследование; конкурсные требования берутся из отдельного официального источника.",
+      "evidenceType": "design-practitioner-text",
+      "accessNote": "Wiley открывает содержание, образец и библиографические данные; полный текст требует покупки или доступа через библиотеку."
+    }
   ]
 }
