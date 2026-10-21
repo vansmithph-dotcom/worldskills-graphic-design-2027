@@ -4,6 +4,10 @@
 
 Общий предварительный маршрут рассчитан на 228 часов: 168 часов занятий и практики с преподавателем и 60 часов самостоятельной работы до 31 января 2027 года. Точное распределение смотрите в [календаре](../timeline.html). Условия Almaty 2027 могут измениться; после официальной публикации программу нужно сверить по [чек-листу](source-update-checklist.md).
 
+Все 28 занятий содержат отдельный самодостаточный кейс с вымышленным клиентом, брифом, несколькими требованиями, решениями и альтернативами, смоделированным замечанием, исправлением и конкретным итоговым файлом. Рядом указан опубликованный первичный пример, из которого заимствуется только наблюдение о проектном приёме. Кейсы и результаты проверки вымышлены и помечены как учебные симуляции; они не являются Test Project или фактическими условиями конкурса. Технические значения печати относятся только к явно названному учебному поставщику и требуют замены реальной спецификацией перед производством.
+
+Таймеры шагов кейсов включены в эти 228 часов: 6 ч 44 мин с преподавателем и 4 ч 43 мин самостоятельной практики. Остающиеся 161 ч 16 мин и 55 ч 17 мин используются для расширенных проектов, обратной связи, исправлений и повторных попыток, симуляций, подготовки файлов, печати и портфолио; распределение уточняется по результатам и опубликованным условиям.
+
 ## Сквозной маршрут фундаментальных понятий
 
 В этой матрице «вводится» означает первое целевое объяснение, «закрепляется» — повторную практику, а «переносится» — применение в другом носителе или при изменённом брифе. Полные инструкции и критерии находятся в занятиях по указанным кодам.
@@ -35,7 +39,7 @@
 
 **Критерии проверки.** Каждое обязательное требование отражено в карте; аудитория сформулирована конкретно; неизвестные не выданы за факт; план содержит проверку и резерв времени.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); The Distributed Practice Effect on Classroom Learning: A Meta-Analytic Review of Applied Research (active; peer-reviewed-review); The effect of testing versus restudy on retention: A meta-analytic review of the testing effect (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); The Distributed Practice Effect on Classroom Learning: A Meta-Analytic Review of Applied Research (active; peer-reviewed-review); The effect of testing versus restudy on retention: A meta-analytic review of the testing effect (active; peer-reviewed-review); MoN Takanawa: The Museum of Narratives — brand identity and open brief (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Аудитория, визуальный поиск и три направления](../module.html?id=01-brief) — 24 минуты
 
@@ -47,7 +51,7 @@
 
 **Критерии проверки.** Три идеи заметно отличаются; референсы имеют источник и собственную заметку; выбор связан с брифом; эскизы показывают иерархию, а не декоративные детали.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); MoN Takanawa: The Museum of Narratives — brand identity and open brief (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 3. [Форма, пространство и визуальная иерархия](../module.html?id=01-brief) — 24 минуты
 
@@ -59,7 +63,7 @@
 
 **Критерии проверки.** Главный элемент заметен без подсказки автора; Форма, размер и расстояния создают предсказуемые группы; В уменьшенной и одноцветной версии обязательное сообщение остаётся читаемым; Решение объясняется через задачу и аудиторию.
 
-**Источники.** Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); MoN Takanawa: The Museum of Narratives — brand identity and open brief (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 4. [Символы, метафоры и контекст](../module.html?id=01-brief) — 24 минуты
 
@@ -71,7 +75,7 @@
 
 **Критерии проверки.** Различены наблюдаемая форма и предположенное значение; Для формы указаны более одного возможного прочтения и целевая аудитория; Запланирована проверка на зрителях без предварительного объяснения; Учитывается культурная уместность и возможное нежелательное прочтение.
 
-**Источники.** Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Effects of semantic information of symbols on cultural product design expression (active; peer-reviewed-study); The Development of Color Perception and Cognition (active; peer-reviewed-review); The visual naturalness effect: Impact of natural logos on brand personality perception (active; peer-reviewed-study). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Icons and metaphors in visual communication: the relevance of Peirce's theory of iconicity (active; peer-reviewed-theoretical-article); Effects of semantic information of symbols on cultural product design expression (active; peer-reviewed-study); The Development of Color Perception and Cognition (active; peer-reviewed-review); The visual naturalness effect: Impact of natural logos on brand personality perception (active; peer-reviewed-study); MoN Takanawa: The Museum of Narratives — brand identity and open brief (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 5. [Три направления за 15 минут](../module.html?id=01-brief) — 15 минут
 
@@ -83,7 +87,7 @@
 
 **Критерии проверки.** Три направления различаются смыслом или визуальным принципом; Обязательные условия брифа и аудитория видны в эскизах; Выбранный путь обоснован критерием задачи, а не только вкусом; Для каждого пути указан риск или вопрос для проверки.
 
-**Источники.** Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline); MoN Takanawa: The Museum of Narratives — brand identity and open brief (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## InDesign с нуля — 44 часов
 
@@ -99,7 +103,7 @@
 
 **Критерии проверки.** Параметры документа совпадают с брифом; направляющие имеют единый шаг; текстовые блоки выровнены; версия и единицы понятны.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Poetry Magazine — custom lettering and issue covers (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Фреймы, читабельность и стили](../module.html?id=02-indesign) — 24 минуты
 
@@ -111,7 +115,7 @@
 
 **Критерии проверки.** Иерархия читается; стили названы по назначению; нет переполнения; размер текста комфортен в целевом формате.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard); Poetry Magazine — custom lettering and issue covers (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 3. [Многостраничная логика и родительские страницы](../module.html?id=02-indesign) — 24 минуты
 
@@ -123,7 +127,7 @@
 
 **Критерии проверки.** Нумерация верна; общие элементы согласованы; заголовки используют стили; страницы читаются в правильном порядке; есть композиционный ритм.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Poetry Magazine — custom lettering and issue covers (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 4. [Preflight, упаковка и PDF](../module.html?id=02-indesign) — 24 минуты
 
@@ -135,7 +139,7 @@
 
 **Критерии проверки.** Все связи доступны; переполнения исправлены; PDF открывается; страницы и размеры совпадают; имена файлов ясные; пакет содержит только нужные материалы.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); Poetry Magazine — custom lettering and issue covers (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Illustrator: векторная точность — 24 часов
 
@@ -151,7 +155,7 @@
 
 **Критерии проверки.** Знак работает в малом размере; оптические поправки обоснованы; контуры чистые; варианты принадлежат одной системе; композиция не зависит только от цвета.
 
-**Источники.** Illustrator desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Illustrator desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text); Gush — brand identity and particulate logo (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Пиктограммы, узлы и чистота исходника](../module.html?id=03-illustrator) — 24 минуты
 
@@ -163,7 +167,7 @@
 
 **Критерии проверки.** Единые вес и масштаб; понятные контуры; группы и артборды названы; вектор открывается; экспорт содержит только нужные области.
 
-**Источники.** Illustrator desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Illustrator desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); Gush — brand identity and particulate logo (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 3. [Какой знак решает задачу: шесть конструкций логотипа](../module.html?id=03-illustrator) — 24 минуты
 
@@ -175,7 +179,7 @@
 
 **Критерии проверки.** Правильно различены словесный, буквенный/монограмма, изобразительный, абстрактный, комбинированный и эмблема; Эскизы отличаются способом передать задачу, а не только цветом; Выбор связан с названием, аудиторией, языком и носителями; Отмечены читаемость и риск при малом размере.
 
-**Источники.** Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); The visual naturalness effect: Impact of natural logos on brand personality perception (active; peer-reviewed-study); From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); The visual naturalness effect: Impact of natural logos on brand personality perception (active; peer-reviewed-study); From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text); Gush — brand identity and particulate logo (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 4. [Текст и форма в одном знаке](../module.html?id=03-illustrator) — 28 минут
 
@@ -187,7 +191,7 @@
 
 **Критерии проверки.** Название читается в полной композиции и не теряет характер шрифта; Форма поддерживает идею, а не закрывает обязательную информацию; Негативное пространство и контуры остаются понятны в одном цвете; Варианты отличаются концепцией и проверены в уменьшенном масштабе.
 
-**Источники.** Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Illustrator desktop release notes (active; official-software-documentation). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Illustrator desktop release notes (active; official-software-documentation); Gush — brand identity and particulate logo (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 5. [От логотипа к системе айдентики](../module.html?id=03-illustrator) — 30 минут
 
@@ -199,7 +203,7 @@
 
 **Критерии проверки.** Правила системы согласованы между собой и объяснены простым языком; Версии читаются на нужных светлых, тёмных и малых форматах; Цвет, типографика и графический приём усиливают узнаваемость; Партнёр способен применить гайд без дополнительного устного объяснения.
 
-**Источники.** From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text); Illustrator desktop release notes (active; official-software-documentation). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** From the brand logo to brand associations and the corporate identity: visual and identity-based logo associations in a university merger (active; peer-reviewed-study); Guidelines for Selecting or Modifying Logos (active; peer-reviewed-study); Designing Brand Identity: A Comprehensive Guide to the World of Brands and Branding (active; design-practitioner-text); Illustrator desktop release notes (active; official-software-documentation); Gush — brand identity and particulate logo (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Photoshop: управляемая обработка — 24 часов
 
@@ -215,7 +219,7 @@
 
 **Критерии проверки.** Исходник не перезаписан; маска не имеет ореола; кожа/материал не потеряли естественную фактуру; настройки разделены по задачам; экспорт открыт и сверён.
 
-**Источники.** Photoshop desktop release notes (active; official-software-documentation); The Development of Color Perception and Cognition (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Photoshop desktop release notes (active; official-software-documentation); The Development of Color Perception and Cognition (active; peer-reviewed-review); How Are Webb’s Full-Color Images Made? (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Композитинг, размер и экспорт](../module.html?id=04-photoshop) — 25 минут
 
@@ -227,7 +231,7 @@
 
 **Критерии проверки.** Свет согласован; перспективы не конфликтуют; края масок чистые; размер соответствует назначению; цветовое пространство и формат взяты из брифа; PSD редактируемый.
 
-**Источники.** Photoshop desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); The Development of Color Perception and Cognition (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Photoshop desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); The Development of Color Perception and Cognition (active; peer-reviewed-review); How Are Webb’s Full-Color Images Made? (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Печать и прототип — 34 часов
 
@@ -243,7 +247,7 @@
 
 **Критерии проверки.** Шаблон не искажён; линии производства находятся в отдельной группе; важный текст остаётся внутри безопасной области; в собранном виде порядок чтения понятен.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Visual complexity = hedonic? Effects of visually complex packages on consumer perceptions and evaluations of products (active; peer-reviewed-study). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Visual complexity = hedonic? Effects of visually complex packages on consumer perceptions and evaluations of products (active; peer-reviewed-study); Lukullus LXXX — anniversary packaging case (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Цвет, вылеты и печатный PDF](../module.html?id=05-print-production) — 25 минут
 
@@ -255,7 +259,7 @@
 
 **Критерии проверки.** Точный размер подтверждён; профиль взят из задания; необходимые вылеты есть; шрифты и связи проверены; PDF открывается и не обрезает содержание.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Lukullus LXXX — anniversary packaging case (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 3. [Черновая печать, цветопроба и цикл исправлений](../module.html?id=05-print-production) — 25 минут
 
@@ -267,7 +271,7 @@
 
 **Критерии проверки.** Черновая печать оценивает реальный размер и композицию; цветопроба не подменяется офисной печатью; правки связаны с наблюдениями; версия после исправления повторно проверена.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Lukullus LXXX — anniversary packaging case (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Цифровая графика и адаптация — 22 часов
 
@@ -283,7 +287,7 @@
 
 **Критерии проверки.** Ключевое сообщение не теряется; в обеих версиях есть понятная иерархия; текст читаем в показанном размере; контраст проверен; нет растяжения изображения.
 
-**Источники.** Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard); Photoshop desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard); Photoshop desktop release notes (active; official-software-documentation); Thinking with Type: A Critical Guide for Designers, Writers, Editors, and Students (active; design-textbook); Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); GOV.UK Design System — components, patterns and examples (active; official-software-documentation). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Интерактивный PDF и цифровая сдача](../module.html?id=06-digital-design) — 25 минут
 
@@ -295,7 +299,7 @@
 
 **Критерии проверки.** Ссылки ведут в правильные разделы; порядок чтения очевиден; PDF открывается; шрифт читаем; название и размер файла соответствуют брифу; доступ к материалам не зависит от сети.
 
-**Источники.** InDesign desktop release notes (active; official-software-documentation); Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** InDesign desktop release notes (active; official-software-documentation); Web Content Accessibility Guidelines (WCAG) 2.2 (active; accessibility-standard); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); GOV.UK Design System — components, patterns and examples (active; official-software-documentation). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Контроль качества и сдача — 20 часов
 
@@ -311,7 +315,7 @@
 
 **Критерии проверки.** Каждое требование имеет проверку; текст сверён; размеры соответствуют брифу; связи и шрифты доступны; экспорт открыт; проблемы исправлены и повторно проверены.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); InDesign desktop release notes (active; official-software-documentation); OD03 — Competition Rules (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); InDesign desktop release notes (active; official-software-documentation); OD03 — Competition Rules (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); NASA Brand Guidelines — current graphic standards (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Папки, связи, версии и безопасная сдача](../module.html?id=07-quality-handoff) — 25 минут
 
@@ -323,7 +327,7 @@
 
 **Критерии проверки.** Один понятный финальный экспорт; редактируемый исходник; связи открываются; версии различимы; нет случайных дублей и личных данных.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); WSK2026_ИЛ_40_Графический дизайн.xlsx (active; local-user-document); InDesign desktop release notes (active; official-software-documentation). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); WSK2026_ИЛ_40_Графический дизайн.xlsx (active; local-user-document); InDesign desktop release notes (active; official-software-documentation); NASA Brand Guidelines — current graphic standards (active; design-practitioner-text). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Английский для конкурсной работы — 16 часов
 
@@ -339,7 +343,7 @@
 
 **Критерии проверки.** Ключевые действия переведены верно; must/should/may различены; числовые параметры не потеряны; неизвестные слова уточняются контекстом, а не угадываются.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); OD04 — Code of Ethics and Conduct (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); OD04 — Code of Ethics and Conduct (active; official-competition-document); Graphic Design Technology — WorldSkills skill profile (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Короткая защита идеи и сообщение о проблеме](../module.html?id=08-competition-english) — 25 минут
 
@@ -351,7 +355,7 @@
 
 **Критерии проверки.** Объяснение связано с брифом; причина конкретна; проблема описана без обвинения; вопрос содержит нужный контекст; высказывание понятно даже с простыми словами.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD04 — Code of Ethics and Conduct (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD04 — Code of Ethics and Conduct (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Graphic Design Technology — WorldSkills skill profile (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ## Диагностика, отбор и симуляции — 26 часов
 
@@ -367,7 +371,7 @@
 
 **Критерии проверки.** Навыки привязаны к доказательствам; сильные стороны и пробелы различимы; выбраны конкретные упражнения; самооценка не превращена в публичный рейтинг.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); The Distributed Practice Effect on Classroom Learning: A Meta-Analytic Review of Applied Research (active; peer-reviewed-review); The effect of testing versus restudy on retention: A meta-analytic review of the testing effect (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); UDL Guidelines 3.0 (active; evidence-informed-education-guideline); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); The Distributed Practice Effect on Classroom Learning: A Meta-Analytic Review of Applied Research (active; peer-reviewed-review); The effect of testing versus restudy on retention: A meta-analytic review of the testing effect (active; peer-reviewed-review); Competition Rules updated for WorldSkills Shanghai 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 2. [Внутренний учебный отбор](../module.html?id=09-exams-selection) — 25 минут
 
@@ -396,7 +400,7 @@
 - Технические условия: если исходник не открывается, обязательное сообщение пропущено или экспорт не соответствует брифу по вине участника, запиши факт и не вычитай скрытый балл; исправление в пределах времени допускается, если оно доступно всем одинаково. Если условия всё ещё не выполнены после сдачи, рекомендацию отложи и назначь одинаковую повторную проверку после практики. При сбое оборудования останови время или добавь одинаковое время всем участникам, кого он затронул.
 
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); OD04 — Code of Ethics and Conduct (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); OD04 — Code of Ethics and Conduct (active; official-competition-document); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Competition Rules updated for WorldSkills Shanghai 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).
 
 ### 3. [Полная симуляция и разбор после работы](../module.html?id=09-exams-selection) — 25 минут
 
@@ -408,4 +412,4 @@
 
 **Критерии проверки.** Работа укладывается в сообщённый учебный лимит; есть контрольные версии; сдача открывается; обсуждение ссылается на критерии; будущие официальные условия не угадываются.
 
-**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review). Подробности и ограничения доступа — в [каталоге](../sources.html).
+**Источники.** Graphic Design Technology — WorldSkills Occupational Standard 2026 (active; official-competition-document); OD03 — Competition Rules (active; official-competition-document); WS_KZ_GDT_2026.docx — предложенные учебные проекты и требования (active; proposed-practice-project); Teaching creativity in art and design studio classes: A systematic literature review (active; peer-reviewed-review); Competition Rules updated for WorldSkills Shanghai 2026 (active; official-competition-document). Подробности и ограничения доступа — в [каталоге](../sources.html).

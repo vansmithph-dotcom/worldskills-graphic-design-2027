@@ -22,3 +22,74 @@ test('quality_english_and_selection_sessions_offer_optional_depth_and_a_specific
 test('pilot_sheet_tracks_goal_term_start_check_and_fallback_without_identifiers',()=>{const sheet=fs.readFileSync(path.join(root,'docs/pilot-observation-sheet.md'),'utf8');for(const phrase of ['временный код','цель занятия своими словами','новый термин','начал первое действие','проверил результат','запасной ход','имена, контакты'])assert.ok(sheet.toLocaleLowerCase('ru').includes(phrase),`pilot sheet needs ${phrase}`);assert.match(sheet,/не записывайте имена/i);assert.match(sheet,/не публикуйте/i);});
 
 test('course_method_keeps_2026_references_provisional_and_updates_after_official_2027_publication',()=>{const text=fs.readFileSync(path.join(root,'docs/course-method.md'),'utf8');assert.match(text,/2026[^\n]{0,200}(временн|предварит)|временн[^\n]{0,200}2026/i);assert.match(text,/после (?:официальной )?публикации[^\n]{0,160}2027/i);assert.match(text,/внутренн[^\n]{0,180}(?:учебн|проектн)[^\n]{0,180}не официальн/i);});
+
+test('modules 07–09 have distinct cases with complete time-boxed artifacts and active professional references',()=>{
+  const sources=read('content/sources.json').sources;
+  const sessions=Object.keys(expected).flatMap(id=>read(`content/modules/${id}.json`).sessions);
+  assert.equal(sessions.length,7);
+  const tasks=new Set();
+  const artifacts=new Set();
+  for(const session of sessions){
+    const study=session.case_study;
+    assert.ok(study,`${session.id} has a concrete case`);
+    assert.equal(study.status,'training-simulation');
+    assert.ok(study.brief.client&&study.brief.audience&&study.brief.task);
+    assert.ok(study.brief.required_content.length>=3);
+    assert.ok(study.brief.unknowns.length>=2);
+    assert.ok(study.decisions[0].alternative&&study.decisions[0].test);
+    assert.match(study.decisions[0].result,/учебная симуляция/i);
+    assert.match(study.revision.finding,/симулированное/i);
+    assert.ok(study.final_output.files.length>=2);
+    assert.ok(study.final_output.checks.length>=2);
+    assert.ok(study.image.alt&&fs.existsSync(path.join(root,study.image.src)),`${session.id} has a local accessible case illustration`);
+    const source=sources.find(item=>item.id===study.real_reference.source_id);
+    assert.equal(source?.status,'active');
+    assert.ok(source.modules.includes(session.id.slice(0,2)+'-'+({ '07':'quality-handoff','08':'competition-english','09':'exams-selection' })[session.id.slice(0,2)]));
+    assert.ok(session.guided_steps&&session.independent_steps);
+    assert.equal([...session.guided_steps,...session.independent_steps].reduce((sum,step)=>sum+step.minutes,0),session.minutes);
+    tasks.add(study.brief.task);
+    artifacts.add(study.final_output.artifact);
+  }
+  assert.equal(tasks.size,7);
+  assert.equal(artifacts.size,7);
+});
+
+test('handoff cases include a complete file tree and a real reopen test',()=>{
+  const sessions=read('content/modules/07-quality-handoff.json').sessions;
+  for(const session of sessions){
+    const study=session.case_study;
+    const files=study.final_output.files.join(' ');
+    assert.match(files,/\.zip|handoff|package/i);
+    assert.match(files,/\.pdf/i);
+    assert.match(files,/\.ai|\.psd|\.indd/i);
+    assert.match(study.decisions[0].test,/без сети|копи|другом компьютере|открой/i);
+    assert.match(study.final_output.checks.join(' '),/связ|откро|откры/i);
+  }
+});
+
+test('English cases teach exact brief terms and a usable short explanation and clarification',()=>{
+  const sessions=read('content/modules/08-competition-english.json').sessions;
+  const brief=sessions.find(x=>x.id==='08-brief-english').case_study;
+  const explain=sessions.find(x=>x.id==='08-explain-ask').case_study;
+  const terms=brief.brief.required_content.join(' ');
+  for(const term of ['MUST','SHOULD','MAY','Do not','mm'])assert.ok(terms.includes(term),`English brief includes ${term}`);
+  const script=explain.final_output.spec.join(' ');
+  for(const phrase of ['The brief asks us to','I chose','because','I checked','Could you clarify'])assert.ok(script.includes(phrase),`speaking scaffold includes ${phrase}`);
+  assert.match(explain.decisions[0].test,/секунд|таймер|врем/i);
+  assert.match(explain.final_output.checks.join(' '),/симптом|проверк|вопрос/i);
+});
+
+test('selection and simulation cases preserve internal-only status and include an announced change',()=>{
+  const module=read('content/modules/09-exams-selection.json');
+  const selection=module.sessions.find(x=>x.id==='09-internal-selection');
+  const simulation=module.sessions.find(x=>x.id==='09-full-simulation');
+  assert.equal(selection.status,'internal-practice');
+  assert.match(selection.case_study.decisions[0].result,/учебная симуляция.*72\.5\/100/is);
+  assert.match(selection.case_study.final_output.checks.join(' '),/не официальный|неофициальн/i);
+  const change=simulation.case_study.brief.required_content.join(' ');
+  assert.match(change,/минута 10|10-й минут|на 10-й минут/i);
+  assert.match(change,/изображени.*отмен|нет прав|права.*не подтверждены|без фотограф/i);
+  assert.match(simulation.case_study.decisions[0].test,/время|таймер|минут/i);
+  assert.match(simulation.case_study.final_output.checks.join(' '),/измен|верси|сдач/i);
+  assert.match(simulation.case_study.brief.constraints.join(' '),/не.*Almaty 2027|не.*официальн/i);
+});

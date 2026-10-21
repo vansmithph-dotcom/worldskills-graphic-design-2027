@@ -33,6 +33,6 @@ test('source_records_have_scope_status_and_safe_access_fields', () => {
 });
 
 test('validator_reports_course_data_without_errors_on_checked_date', () => {
-  const result = validateCourse(root, '2026-10-20');
+  const result = validateCourse(root, '2026-10-21');
   assert.deepEqual(result.errors, []);
 });
