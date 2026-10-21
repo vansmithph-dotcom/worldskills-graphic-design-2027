@@ -397,7 +397,7 @@ const evidenceLabels = {
   'peer-reviewed-study': 'Рецензируемое исследование',
   'peer-reviewed-review': 'Рецензируемый научный обзор',
   'design-textbook': 'Учебная книга по дизайну',
-  'design-practitioner-text': 'Профессиональная учебная книга',
+  'design-practitioner-text': 'Профессиональные материалы по дизайну',
   'local-user-document': 'Локальный документ пользователя',
   'proposed-practice-project': 'Предложенный учебный проект'
 };
