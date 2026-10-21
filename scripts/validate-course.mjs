@@ -56,8 +56,8 @@ function validateTextList(value, minimum, label, sessionLabel, errors) {
 }
 
 function validatePracticeSteps(steps, label, sessionLabel, errors) {
-  if (!Array.isArray(steps) || steps.length < 2) {
-    errors.push(`${sessionLabel}: ${label} должен содержать не менее двух шагов.`);
+  if (!Array.isArray(steps) || steps.length < 3) {
+    errors.push(`${sessionLabel}: ${label} должен содержать не менее трёх шагов.`);
     return 0;
   }
   let total = 0;
@@ -181,7 +181,17 @@ export function validateCourse(rootDir, today = new Date()) {
       if (!allowedEvidence.has(source.evidenceType)) errors.push(`${source.id}: неизвестный тип доказательности ${source.evidenceType}.`);
       if (scholarlyEvidence.has(source.evidenceType) && (!source.accessNote || source.accessNote.length < 20)) errors.push(`${source.id}: у академического источника должно быть указано состояние полного текста/доступа.`);
       if (!Array.isArray(source.modules) || source.modules.some((id) => !ids.has(id))) errors.push(`${source.id}: указан неизвестный модуль.`);
-      if (source.access === 'external' && (!source.url || source.reference !== null)) errors.push(`${source.id}: внешний источник требует url и reference:null.`);
+      if (source.access === 'external') {
+        if (!source.url || source.reference !== null) errors.push(`${source.id}: внешний источник требует url и reference:null.`);
+        if (source.url) {
+          try {
+            const externalUrl = new URL(source.url);
+            if (externalUrl.protocol !== 'https:' || !externalUrl.hostname || externalUrl.username || externalUrl.password) errors.push(`${source.id}: внешний url должен быть корректным HTTPS-адресом без данных авторизации.`);
+          } catch {
+            errors.push(`${source.id}: внешний url должен быть корректным HTTPS-адресом.`);
+          }
+        }
+      }
       else if (source.access === 'local-reference' && (source.url !== null || !source.reference)) errors.push(`${source.id}: локальная ссылка требует url:null и название reference.`);
       else if (!['external', 'local-reference'].includes(source.access)) errors.push(`${source.id}: неизвестный способ доступа.`);
       const date = new Date(`${source.checkedAt}T00:00:00Z`);

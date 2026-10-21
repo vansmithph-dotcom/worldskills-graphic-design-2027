@@ -96,7 +96,7 @@ test('modules 01–03 provide a distinct complete worked case and artifact for a
     visualPaths.add(image.src);
 
     for (const [field, steps] of [['guided_steps', session.guided_steps], ['independent_steps', session.independent_steps]]) {
-      assert.ok(Array.isArray(steps) && steps.length >= 2, `${label} has detailed ${field}`);
+      assert.ok(Array.isArray(steps) && steps.length >= 3, `${label} has detailed ${field}`);
       steps.forEach((step, index) => {
         assert.ok(Number.isInteger(step.minutes) && step.minutes > 0, `${label} ${field}[${index}] has minutes`);
         assertString(step.action, `${label} ${field}[${index}].action`);

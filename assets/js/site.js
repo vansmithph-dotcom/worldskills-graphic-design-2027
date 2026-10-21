@@ -12,6 +12,17 @@ const node = (tag, value = '', cls = '') => {
   return element;
 };
 
+const heading = (level, value) => node(`h${Math.max(1, Math.min(6, level))}`, value);
+
+export function safeExternalUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
 async function json(url) {
   const response = await fetch(url);
   if (!response.ok) throw Error(`Не загружен ${url}`);
@@ -20,10 +31,10 @@ async function json(url) {
 
 const modules = async () => (await json('content/modules.json')).modules;
 
-function section(parent, title, value, className = 'session-part') {
+function section(parent, title, value, className = 'session-part', headingLevel = 3) {
   const part = document.createElement('section');
   part.className = className;
-  part.append(node('h3', title));
+  part.append(heading(headingLevel, title));
   if (Array.isArray(value)) {
     const list = document.createElement('ul');
     value.forEach((item) => list.append(node('li', item)));
@@ -60,7 +71,7 @@ function splitExplanationParagraphs(text = '') {
   return String(text).split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean);
 }
 
-function renderTeachingBlocks(parent, blocks = []) {
+function renderTeachingBlocks(parent, blocks = [], headingLevel = 3) {
   const group = document.createElement('section');
   group.className = 'teaching-blocks';
   group.setAttribute('aria-label', 'Объяснение по блокам');
@@ -68,7 +79,7 @@ function renderTeachingBlocks(parent, blocks = []) {
     const article = document.createElement('article');
     article.className = 'teaching-block';
     article.append(node('span', String(index + 1).padStart(2, '0'), 'teaching-block-number'));
-    article.append(node('h3', block.heading));
+    article.append(heading(headingLevel, block.heading));
     splitExplanationParagraphs(block.text).forEach((paragraph) => article.append(node('p', paragraph)));
     group.append(article);
   });
@@ -76,20 +87,20 @@ function renderTeachingBlocks(parent, blocks = []) {
 }
 
 
-export function renderSessionGoal(parent, goal) {
+export function renderSessionGoal(parent, goal, headingLevel = 3) {
   if (typeof goal !== 'string' || !goal.trim()) return null;
   const panel = document.createElement('section');
   panel.className = 'session-goal';
-  panel.append(node('h3', 'К концу занятия ты сможешь'), node('p', goal));
+  panel.append(heading(headingLevel, 'К концу занятия ты сможешь'), node('p', goal));
   parent.append(panel);
   return panel;
 }
 
-export function renderSessionChallenge(parent, challenge) {
+export function renderSessionChallenge(parent, challenge, headingLevel = 3) {
   if (typeof challenge !== 'string' || !challenge.trim()) return null;
   const panel = document.createElement('section');
   panel.className = 'session-challenge';
-  panel.append(node('h3', 'Усложнение по желанию'), node('p', challenge));
+  panel.append(heading(headingLevel, 'Усложнение по желанию'), node('p', challenge));
   parent.append(panel);
   return panel;
 }
@@ -103,11 +114,11 @@ export function renderSessionNotice(parent, notice) {
   return panel;
 }
 
-export function renderWorkedExample(parent, example, { eager = false } = {}) {
+export function renderWorkedExample(parent, example, { eager = false, headingLevel = 3 } = {}) {
   if (!example?.description) return;
   const part = document.createElement('section');
   part.className = 'session-part worked-example';
-  part.append(node('h3', 'Разобранный визуальный пример'));
+  part.append(heading(headingLevel, 'Разобранный визуальный пример'));
   if (example.image) {
     part.append(node('p', 'На телефоне прокручивайте схему по горизонтали, чтобы прочитать подписи.', 'worked-example-scroll-hint'));
     const figure = document.createElement('figure');
@@ -125,11 +136,11 @@ export function renderWorkedExample(parent, example, { eager = false } = {}) {
   return part;
 }
 
-function renderCaseField(parent, label, value) {
+function renderCaseField(parent, label, value, headingLevel = 5) {
   if (Array.isArray(value) ? value.length === 0 : !value) return;
   const field = document.createElement('div');
   field.className = 'case-study-field';
-  field.append(node('h5', label));
+  field.append(heading(headingLevel, label));
   if (Array.isArray(value)) {
     const list = document.createElement('ul');
     value.forEach((item) => list.append(node('li', item)));
@@ -138,20 +149,20 @@ function renderCaseField(parent, label, value) {
   parent.append(field);
 }
 
-function renderCaseGroup(parent, title, fields) {
+function renderCaseGroup(parent, title, fields, headingLevel = 4) {
   const group = document.createElement('section');
   group.className = 'case-study-group';
-  group.append(node('h4', title));
-  fields.forEach(([label, value]) => renderCaseField(group, label, value));
+  group.append(heading(headingLevel, title));
+  fields.forEach(([label, value]) => renderCaseField(group, label, value, headingLevel + 1));
   parent.append(group);
   return group;
 }
 
-function renderCaseOrderedList(parent, title, items = []) {
+function renderCaseOrderedList(parent, title, items = [], headingLevel = 5) {
   if (!Array.isArray(items) || items.length === 0) return null;
   const field = document.createElement('div');
   field.className = 'case-study-field';
-  field.append(node('h5', title));
+  field.append(heading(headingLevel, title));
   const list = document.createElement('ol');
   list.className = 'case-study-ordered-list';
   items.forEach((item) => list.append(node('li', item)));
@@ -165,17 +176,18 @@ function dimensionLabel(size, keys) {
   return `${keys.map((key) => size[key]).join(' × ')} мм`;
 }
 
-export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
+export function renderCaseStudy(parent, caseStudy, sourceById = new Map(), { eagerImages = false, headingLevel = 3 } = {}) {
   if (!caseStudy?.title) return null;
   const card = document.createElement('section');
   card.className = 'case-study';
   if (caseStudy.status === 'training-simulation') {
     card.append(node('p', 'Учебная симуляция · вымышленный заказ', 'case-study-status'));
   }
-  card.append(node('h3', caseStudy.title));
+  card.append(heading(headingLevel, caseStudy.title));
+  const renderGroup = (title, fields) => renderCaseGroup(card, title, fields, headingLevel + 1);
 
   const brief = caseStudy.brief ?? {};
-  renderCaseGroup(card, 'Бриф', [
+  renderGroup('Бриф', [
     ['Клиент', brief.client],
     ['Аудитория', brief.audience],
     ['Задача', brief.task],
@@ -188,7 +200,7 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
 
   if (caseStudy.input_asset) {
     const asset = caseStudy.input_asset;
-    renderCaseGroup(card, 'Локальный учебный исходник', [
+    renderGroup('Локальный учебный исходник', [
       ['Файл', asset.file],
       ['Происхождение', asset.provenance],
       ['Условия использования', asset.rights],
@@ -200,7 +212,7 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
   if (caseStudy.supplier_spec) {
     const spec = caseStudy.supplier_spec;
     const panels = (spec.panels ?? []).map((panel) => `${panel.name}: ${panel.width_mm} мм`);
-    renderCaseGroup(card, 'Спецификация вымышленного поставщика', [
+    renderGroup('Спецификация вымышленного поставщика', [
       ['Статус условий', spec.status === 'fictional-training-spec' ? 'Только для этого учебного заказа; это не стандарт WorldSkills и не спецификация реальной типографии.' : spec.status],
       ['Поставщик', spec.supplier],
       ['Изделие', spec.product],
@@ -222,7 +234,7 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
   if (caseStudy.dieline) {
     const dieline = caseStudy.dieline;
     const panelLabels = (dieline.panels ?? []).map((panel) => `${panel.name}: ${panel.width_mm} мм`);
-    renderCaseGroup(card, 'Развёртка и технические линии', [
+    renderGroup('Развёртка и технические линии', [
       ['Последовательность панелей', panelLabels],
       ['Обозначение реза', dieline.line_legend?.cut],
       ['Обозначение сгиба', dieline.line_legend?.fold],
@@ -233,7 +245,7 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
 
   if (caseStudy.prototype) {
     const prototype = caseStudy.prototype;
-    renderCaseGroup(card, 'Физический прототип и пользовательская проверка', [
+    renderGroup('Физический прототип и пользовательская проверка', [
       ['Масштаб сборки', Number.isFinite(prototype.scale) ? `1:${prototype.scale} (учебный масштаб)` : ''],
       ['Материалы', prototype.materials],
       ['Участники проверки', prototype.user_test?.participants ? `${prototype.user_test.participants.min}–${prototype.user_test.participants.max} человека` : ''],
@@ -246,37 +258,37 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
     ]);
     const prototypeGroup = document.createElement('section');
     prototypeGroup.className = 'case-study-group case-study-prototype';
-    prototypeGroup.append(node('h4', 'Сборка и повторная проверка'));
-    renderCaseOrderedList(prototypeGroup, 'Шаги сборки', prototype.assembly_steps);
-    renderCaseOrderedList(prototypeGroup, 'Задания участникам без подсказок', prototype.user_test?.prompts);
-    renderCaseOrderedList(prototypeGroup, 'Проверить при повторном тесте', prototype.retest?.checks);
+    prototypeGroup.append(heading(headingLevel + 1, 'Сборка и повторная проверка'));
+    renderCaseOrderedList(prototypeGroup, 'Шаги сборки', prototype.assembly_steps, headingLevel + 2);
+    renderCaseOrderedList(prototypeGroup, 'Задания участникам без подсказок', prototype.user_test?.prompts, headingLevel + 2);
+    renderCaseOrderedList(prototypeGroup, 'Проверить при повторном тесте', prototype.retest?.checks, headingLevel + 2);
     card.append(prototypeGroup);
   }
 
   const decisions = document.createElement('section');
   decisions.className = 'case-study-group case-study-decisions';
-  decisions.append(node('h4', 'Ход решения и проверка'));
+  decisions.append(heading(headingLevel + 1, 'Ход решения и проверка'));
   const decisionList = document.createElement('ol');
   (caseStudy.decisions ?? []).forEach((decision) => {
     const item = document.createElement('li');
     item.className = 'case-study-decision';
-    item.append(node('h5', decision.stage));
-    renderCaseField(item, 'Выбор', decision.choice);
-    renderCaseField(item, 'Почему', decision.reason);
-    renderCaseField(item, 'Альтернатива', decision.alternative);
-    renderCaseField(item, 'Как проверить', decision.test);
-    renderCaseField(item, 'Что показала проверка', decision.result);
+    item.append(heading(headingLevel + 2, decision.stage));
+    renderCaseField(item, 'Выбор', decision.choice, headingLevel + 3);
+    renderCaseField(item, 'Почему', decision.reason, headingLevel + 3);
+    renderCaseField(item, 'Альтернатива', decision.alternative, headingLevel + 3);
+    renderCaseField(item, 'Как проверить', decision.test, headingLevel + 3);
+    renderCaseField(item, 'Что показала проверка', decision.result, headingLevel + 3);
     decisionList.append(item);
   });
   decisions.append(decisionList);
   card.append(decisions);
 
-  renderCaseGroup(card, 'Пересмотр после проверки', [
+  renderGroup('Пересмотр после проверки', [
     ['Наблюдение', caseStudy.revision?.finding],
     ['Изменение', caseStudy.revision?.change],
     ['Результат повторной проверки', caseStudy.revision?.outcome]
   ]);
-  renderCaseGroup(card, 'Итоговый комплект', [
+  renderGroup('Итоговый комплект', [
     ['Артефакт', caseStudy.final_output?.artifact],
     ['Спецификация', caseStudy.final_output?.spec],
     ['Файлы', caseStudy.final_output?.files],
@@ -285,14 +297,14 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
 
   const reference = caseStudy.real_reference ?? {};
   const source = sourceById.get(reference.source_id);
-  const sourceGroup = renderCaseGroup(card, 'Реальная опубликованная работа для сравнения', [
+  const sourceGroup = renderGroup('Реальная опубликованная работа для сравнения', [
     ['Что можно наблюдать на странице проекта', reference.observation],
     ['Чего эта страница не подтверждает', reference.limit]
   ]);
   if (source) {
     const citation = document.createElement('p');
     citation.className = 'case-study-source';
-    const link = /^https:\/\//i.test(source.url ?? '') ? node('a', source.title) : node('strong', source.title);
+    const link = safeExternalUrl(source.url) ? node('a', source.title) : node('strong', source.title);
     if (link.tag === 'a') {
       link.href = source.url;
       link.target = '_blank';
@@ -310,7 +322,7 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
     const image = document.createElement('img');
     image.src = caseStudy.image.src;
     image.alt = caseStudy.image.alt ?? '';
-    image.loading = 'lazy';
+    image.loading = eagerImages ? 'eager' : 'lazy';
     figure.append(image);
     if (caseStudy.image.caption) figure.append(node('figcaption', caseStudy.image.caption));
     card.append(figure);
@@ -320,17 +332,17 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
   return card;
 }
 
-export function renderPracticeSteps(parent, title, steps = []) {
+export function renderPracticeSteps(parent, title, steps = [], headingLevel = 3) {
   if (!Array.isArray(steps) || steps.length === 0) return null;
   const sectionElement = document.createElement('section');
   sectionElement.className = 'session-part practice-steps';
-  sectionElement.append(node('h3', title));
+  sectionElement.append(heading(headingLevel, title));
   const list = document.createElement('ol');
   list.className = 'practice-step-list';
   steps.forEach((step, index) => {
     const item = document.createElement('li');
     item.className = 'practice-step';
-    item.append(node('h4', `Шаг ${index + 1} · ${step.minutes} мин`));
+    item.append(heading(headingLevel + 1, `Шаг ${index + 1} · ${step.minutes} мин`));
     renderCaseField(item, 'Действие', step.action);
     renderCaseField(item, 'Результат шага', step.output);
     renderCaseField(item, 'Контрольная точка', step.checkpoint);
@@ -341,14 +353,14 @@ export function renderPracticeSteps(parent, title, steps = []) {
   return sectionElement;
 }
 
-function renderAdaptation(parent, adaptation) {
+function renderAdaptation(parent, adaptation, headingLevel = 3) {
   if (!adaptation?.trigger) return;
   const panel = document.createElement('section');
   panel.className = 'session-adaptation';
-  panel.append(node('h3', 'Если условие изменилось'));
+  panel.append(heading(headingLevel, 'Если условие изменилось'));
   panel.append(node('p', `Сигнал: ${adaptation.trigger}`));
   panel.append(node('p', `Запасной ход: ${adaptation.alternative}`));
-  if (adaptation.preserve?.length) section(panel, 'Сохрани обязательное', adaptation.preserve, 'session-adaptation-list');
+  if (adaptation.preserve?.length) section(panel, 'Сохрани обязательное', adaptation.preserve, 'session-adaptation-list', headingLevel + 1);
   parent.append(panel);
 }
 
@@ -499,8 +511,8 @@ function renderSessionSources(parent, sourceIds = [], sourceById = new Map()) {
   records.forEach((source) => {
     const item = document.createElement('li');
     const evidence = node('span', `${evidenceLabels[source.evidenceType] ?? source.evidenceType} · ${source.publisher} · ${source.version}`, 'source-meta');
-    const title = source.url ? node('a', source.title) : node('strong', source.title);
-    if (source.url) {
+    const title = safeExternalUrl(source.url) ? node('a', source.title) : node('strong', source.title);
+    if (title.tag === 'a') {
       title.href = source.url;
       title.target = '_blank';
       title.rel = 'noreferrer';
@@ -547,7 +559,7 @@ async function sourcePage() {
         node('p', source.use)
       );
       if (source.accessNote) card.append(node('p', `Доступ: ${source.accessNote}`, 'source-meta'));
-      if (source.url) {
+      if (safeExternalUrl(source.url)) {
         const link = node('a', 'Открыть источник ↗');
         link.href = source.url;
         link.target = '_blank';
@@ -604,22 +616,22 @@ async function printPage() {
         const article = document.createElement('article');
         article.className = 'print-brief';
         article.append(node('h3', session.title));
-        renderSessionGoal(article, session.goal);
+        renderSessionGoal(article, session.goal, 4);
         renderSessionNotice(article, session.notice);
-        renderTeachingBlocks(article, session.teaching_blocks);
+        renderTeachingBlocks(article, session.teaching_blocks, 4);
         const processVisual = processFigure(session.process_visual, 'process-visual print-visual');
         if (processVisual) article.append(processVisual);
-        renderWorkedExample(article, session.worked_example, { eager: true });
-        renderCaseStudy(article, session.case_study, sourceById);
-        if (session.guided_steps?.length) renderPracticeSteps(article, 'Практика с опорой', session.guided_steps);
-        else section(article, 'Практика с опорой', session.guided_practice);
-        if (session.independent_steps?.length) renderPracticeSteps(article, 'Самостоятельное задание', session.independent_steps);
-        else section(article, 'Самостоятельное задание', session.independent_brief);
-        renderSessionChallenge(article, session.challenge);
-        if (session.criteria?.length) section(article, 'Критерии самопроверки', session.criteria);
-        if (session.common_errors?.length) section(article, 'Частые ошибки', session.common_errors);
-        if (session.revisit) section(article, 'Повторная попытка', session.revisit);
-        renderAdaptation(article, session.adaptation);
+        renderWorkedExample(article, session.worked_example, { eager: true, headingLevel: 4 });
+        renderCaseStudy(article, session.case_study, sourceById, { eagerImages: true, headingLevel: 4 });
+        if (session.guided_steps?.length) renderPracticeSteps(article, 'Практика с опорой', session.guided_steps, 4);
+        else section(article, 'Практика с опорой', session.guided_practice, 'session-part', 4);
+        if (session.independent_steps?.length) renderPracticeSteps(article, 'Самостоятельное задание', session.independent_steps, 4);
+        else section(article, 'Самостоятельное задание', session.independent_brief, 'session-part', 4);
+        renderSessionChallenge(article, session.challenge, 4);
+        if (session.criteria?.length) section(article, 'Критерии самопроверки', session.criteria, 'session-part', 4);
+        if (session.common_errors?.length) section(article, 'Частые ошибки', session.common_errors, 'session-part', 4);
+        if (session.revisit) section(article, 'Повторная попытка', session.revisit, 'session-part', 4);
+        renderAdaptation(article, session.adaptation, 4);
         root.append(article);
       });
     } catch {

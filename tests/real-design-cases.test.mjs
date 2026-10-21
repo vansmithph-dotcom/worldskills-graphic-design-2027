@@ -53,3 +53,12 @@ test('case references are separated from competition standards and assignments',
   assert.match(markdown, /внешнее чтение не требуется/i);
   assert.match(markdown, /объясняют применение материалов в одном контексте/i);
 });
+
+test('Module 01 observations match the MoN Takanawa source they cite', () => {
+  const module = readJson('content/modules/01-brief.json');
+  const source = readJson('content/sources.json').sources.find((item) => item.id === 'case-01-mon-identity');
+  const references = module.sessions.map((session) => session.case_study?.real_reference).filter((reference) => reference?.source_id === source.id);
+  assert.ok(references.length >= 2);
+  assert.ok(references.every((reference) => !/Poetry Magazine/i.test(reference.observation)));
+  assert.ok(references.every((reference) => /MoN Takanawa|спирал/i.test(reference.observation)));
+});

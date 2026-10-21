@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { renderCaseStudy, renderPracticeSteps } from '../assets/js/site.js';
+import { renderCaseStudy, renderPracticeSteps, safeExternalUrl } from '../assets/js/site.js';
 
 function fakeElement(tag) {
   return {
@@ -171,6 +171,24 @@ test('case study renders a simulation label, complete brief, decision loop, outp
   });
 });
 
+test('case image can load eagerly for print and print headings can follow the document outline', () => {
+  withFakeDocument(() => {
+    const parent = fakeElement('article');
+    renderCaseStudy(parent, completeCase, new Map(), { eagerImages: true, headingLevel: 4 });
+    const title = findElement(parent, (child) => /^h[1-6]$/.test(child.tag));
+    const image = findElement(parent, (child) => child.tag === 'img');
+    assert.equal(title.tag, 'h4');
+    assert.equal(image.loading, 'eager');
+  });
+});
+
+test('external source links accept HTTPS URLs only', () => {
+  assert.equal(safeExternalUrl('https://example.org/page'), true);
+  assert.equal(safeExternalUrl('http://example.org/page'), false);
+  assert.equal(safeExternalUrl('javascript:alert(1)'), false);
+  assert.equal(safeExternalUrl('not a URL'), false);
+});
+
 test('case prose is inserted as text instead of interpreted as markup', () => {
   withFakeDocument(() => {
     const parent = fakeElement('article');
@@ -241,4 +259,6 @@ test('screen and print routes share the case and practice renderers in the same 
     assert.ok(independentIndex > guidedIndex, `${route} renders independent practice after guided practice`);
   }
   assert.match(print, /content\/sources\.json/);
+  assert.match(print, /eagerImages: true, headingLevel: 4/);
+  assert.match(print, /renderWorkedExample\(article, session\.worked_example, \{ eager: true, headingLevel: 4 \}\)/);
 });

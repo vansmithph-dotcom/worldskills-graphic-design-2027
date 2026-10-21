@@ -212,6 +212,30 @@ test('validator reports broken case fields, references, images and timed steps a
   }
 });
 
+test('validator requires at least three guided and independent actions per session', (t) => {
+  const root = courseFixture(t);
+  const relative = 'content/modules/01-brief.json';
+  const module = readJson(root, relative);
+  const session = module.sessions[0];
+  session.independent_steps = session.independent_steps.slice(0, 2);
+  writeJson(root, relative, module);
+  const { errors } = validateCourse(root, '2026-10-21');
+  assert.ok(errors.some((message) => message.includes(session.id) && message.includes('independent_steps') && /не менее тр[её]х шагов/.test(message)));
+});
+
+test('validator rejects malformed or non-HTTPS external source URLs', (t) => {
+  for (const url of ['not a URL', 'javascript:alert(1)']) {
+    const root = courseFixture(t);
+    const relative = 'content/sources.json';
+    const catalog = readJson(root, relative);
+    const source = catalog.sources.find((item) => item.access === 'external');
+    source.url = url;
+    writeJson(root, relative, catalog);
+    const { errors } = validateCourse(root, '2026-10-21');
+    assert.ok(errors.some((message) => message.includes(source.id) && /HTTPS.*коррект|коррект.*HTTPS/i.test(message)), `${url} must fail the source URL check`);
+  }
+});
+
 test('validator keeps timed case practice inside the 168/60 hour allocations', (t) => {
   const root = courseFixture(t);
   const relative = 'content/modules/01-brief.json';
