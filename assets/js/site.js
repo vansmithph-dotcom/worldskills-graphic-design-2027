@@ -75,6 +75,56 @@ function renderTeachingBlocks(parent, blocks = []) {
   parent.append(group);
 }
 
+
+export function renderSessionGoal(parent, goal) {
+  if (typeof goal !== 'string' || !goal.trim()) return null;
+  const panel = document.createElement('section');
+  panel.className = 'session-goal';
+  panel.append(node('h3', 'К концу занятия ты сможешь'), node('p', goal));
+  parent.append(panel);
+  return panel;
+}
+
+export function renderSessionChallenge(parent, challenge) {
+  if (typeof challenge !== 'string' || !challenge.trim()) return null;
+  const panel = document.createElement('section');
+  panel.className = 'session-challenge';
+  panel.append(node('h3', 'Усложнение по желанию'), node('p', challenge));
+  parent.append(panel);
+  return panel;
+}
+
+export function renderSessionNotice(parent, notice) {
+  if (typeof notice !== 'string' || !notice.trim()) return null;
+  const panel = document.createElement('aside');
+  panel.className = 'session-notice';
+  panel.append(node('p', notice));
+  parent.append(panel);
+  return panel;
+}
+
+export function renderWorkedExample(parent, example, { eager = false } = {}) {
+  if (!example?.description) return;
+  const part = document.createElement('section');
+  part.className = 'session-part worked-example';
+  part.append(node('h3', 'Разобранный визуальный пример'));
+  if (example.image) {
+    part.append(node('p', 'На телефоне прокручивайте схему по горизонтали, чтобы прочитать подписи.', 'worked-example-scroll-hint'));
+    const figure = document.createElement('figure');
+    figure.className = 'worked-example-figure';
+    const image = document.createElement('img');
+    image.src = example.image;
+    image.alt = example.alt ?? '';
+    image.loading = eager ? 'eager' : 'lazy';
+    figure.append(image);
+    if (example.caption) figure.append(node('figcaption', example.caption));
+    part.append(figure);
+  }
+  splitExplanationParagraphs(example.description).forEach((paragraph) => part.append(node('p', paragraph)));
+  parent.append(part);
+  return part;
+}
+
 function renderAdaptation(parent, adaptation) {
   if (!adaptation?.trigger) return;
   const panel = document.createElement('section');
@@ -145,22 +195,17 @@ async function modulePage() {
         node('h2', session.title)
       );
       card.append(heading);
+      renderSessionGoal(card, session.goal);
+      renderSessionNotice(card, session.notice);
       renderTeachingBlocks(card, session.teaching_blocks);
       const processVisual = processFigure(session.process_visual);
       if (processVisual) card.append(processVisual);
 
-      if (session.worked_example) {
-        const example = document.createElement('section');
-        example.className = 'session-part worked-example';
-        example.append(node('h3', 'Разбор инфографики'));
-        splitExplanationParagraphs(session.worked_example.description).forEach((paragraph) => {
-          example.append(node('p', paragraph));
-        });
-        card.append(example);
-      }
+      renderWorkedExample(card, session.worked_example);
 
       section(card, 'Практика с опорой', session.guided_practice);
       section(card, 'Самостоятельное задание', session.independent_brief);
+      renderSessionChallenge(card, session.challenge);
       if (session.criteria?.length) section(card, 'Критерии самопроверки', session.criteria);
       renderAdaptation(card, session.adaptation);
       if (session.common_errors?.length) section(card, 'Частые ошибки', session.common_errors);
@@ -337,13 +382,19 @@ async function printPage() {
         const article = document.createElement('article');
         article.className = 'print-brief';
         article.append(node('h3', session.title));
+        renderSessionGoal(article, session.goal);
+        renderSessionNotice(article, session.notice);
         renderTeachingBlocks(article, session.teaching_blocks);
         const processVisual = processFigure(session.process_visual, 'process-visual print-visual');
         if (processVisual) article.append(processVisual);
-        article.append(node('p', `Самостоятельное задание: ${session.independent_brief}`), node('h4', 'Проверь себя'));
-        const list = document.createElement('ul');
-        (session.criteria ?? []).forEach((criterion) => list.append(node('li', criterion)));
-        article.append(list);
+        renderWorkedExample(article, session.worked_example, { eager: true });
+        section(article, 'Практика с опорой', session.guided_practice);
+        section(article, 'Самостоятельное задание', session.independent_brief);
+        renderSessionChallenge(article, session.challenge);
+        if (session.criteria?.length) section(article, 'Критерии самопроверки', session.criteria);
+        if (session.common_errors?.length) section(article, 'Частые ошибки', session.common_errors);
+        if (session.revisit) section(article, 'Повторная попытка', session.revisit);
+        renderAdaptation(article, session.adaptation);
         root.append(article);
       });
     } catch {

@@ -115,8 +115,14 @@ test('every_session_is_self_contained_and_uses_its_own_process_infographic', () 
       assert.doesNotMatch(svg, /…/, session.id + ' visual should show complete step labels');
       for (const detail of visual.details) assert.ok(svg.includes(detail), `${session.id} infographic should explain: ${detail}`);
       assert.ok(session.worked_example?.description, `${session.id} needs an explanation of its worked visual example`);
-      assert.equal(session.worked_example.image, visual.image, `${session.id} worked example must point to its matching process infographic`);
-      assert.equal(session.worked_example.alt, visual.alt, `${session.id} worked example must share the matching infographic alternative text`);
+      assert.notEqual(session.worked_example.image, visual.image, `${session.id} worked example should have a distinct illustrative image`);
+      assert.match(session.worked_example.image, /^assets\/examples\//, `${session.id} worked example should use the example library`);
+      assert.ok(session.worked_example.caption, `${session.id} worked example needs a visible caption`);
+      const examplePath = path.join(root, session.worked_example.image);
+      assert.ok(fs.existsSync(examplePath), `${session.id} example image is missing`);
+      const exampleSvg = fs.readFileSync(examplePath, 'utf8');
+      assert.match(exampleSvg, /<title\b/i, `${session.id} example needs an accessible title`);
+      assert.match(exampleSvg, /<desc\b/i, `${session.id} example needs an accessible description`);
       const exampleText = session.worked_example.description.trim();
       const exampleParagraphs = exampleText.split(/\r?\n\s*\r?\n/);
       assert.ok(exampleText.length >= 400, session.id + ' worked example should be a complete, detailed walkthrough');
@@ -154,10 +160,33 @@ test('every_session_is_self_contained_and_uses_its_own_process_infographic', () 
   assert.match(site, /splitExplanationParagraphs/);
   assert.match(site, /process-step-list/);
   assert.match(site, /visual\.details\?\.\[index\]/);
-  assert.doesNotMatch(site, /worked_example\.image/);
+  assert.match(site, /renderWorkedExample\(card, session\.worked_example\)/);
   const css = fs.readFileSync(path.join(root, 'assets/css/site.css'), 'utf8');
   assert.match(css, /@media\(max-width:900px\)[\s\S]*?\.process-visual img\{display:none\}[\s\S]*?\.process-step-list\{display:grid;/);
   assert.match(css, /\.worked-example\{display:block\}/);
+  assert.match(css, /\.worked-example-figure\{[^}]*overflow-x:auto/);
+  assert.match(css, /@media\(max-width:560px\)/);
+  assert.match(css, /\.worked-example-figure img\{width:680px;max-width:none\}/);
+  assert.match(css, /\.worked-example-figure img\{[^}]*max-height:none/);
+  assert.match(css, /@media print/);
+  assert.match(css, /\.worked-example-figure img\{width:100%;max-width:none;max-height:none\}/);
+  assert.match(site, /worked-example-scroll-hint/);
+});
+
+test('worked_examples_match_the_specific_activity_they_explain', () => {
+  const expected = new Map([
+    ['01-rapid-ideation', 'assets/examples/rapid-ideation-directions.svg'],
+    ['04-composite-output', 'assets/examples/photo-composite-check.svg'],
+    ['06-interactive-pdf', 'assets/examples/interactive-pdf-navigation.svg'],
+    ['08-explain-ask', 'assets/examples/design-decision-explanation.svg'],
+    ['09-diagnostic', 'assets/examples/diagnostic-evidence-card.svg'],
+    ['09-internal-selection', 'assets/examples/selection-rubric-scorecard.svg']
+  ]);
+  for (const file of fs.readdirSync(path.join(root, 'content/modules')).filter((name) => name.endsWith('.json'))) {
+    for (const session of moduleData(file.replace(/\.json$/, '')).sessions) {
+      if (expected.has(session.id)) assert.equal(session.worked_example.image, expected.get(session.id), `${session.id} should show the matching example`);
+    }
+  }
 });
 
 test('curriculum_map_covers_every_session_output_criteria_and_source_status', () => {
@@ -227,4 +256,58 @@ test('public_course_copy_uses_sessions_instead_of_the_old_russian_label', () => 
     const text = fs.readFileSync(file, 'utf8');
     assert.doesNotMatch(text, new RegExp(legacyLabel, 'iu'), path.relative(root, file));
   }
+});
+
+test('concept_progression_matrix_uses_real_sessions_across_contexts', () => {
+  const map = fs.readFileSync(path.join(root, 'docs/curriculum-map.md'), 'utf8');
+  const headings = map.split('\n');
+  const start = headings.findIndex((line) => line.trim() === '## Сквозной маршрут фундаментальных понятий');
+  assert.ok(start >= 0, 'curriculum map needs a concept progression section');
+  const end = headings.findIndex((line, index) => index > start && /^## /.test(line));
+  const rows = headings.slice(start + 1, end < 0 ? undefined : end)
+    .filter((line) => line.trim().startsWith('|') && !/^\|\s*-+/.test(line.trim()))
+    .map((line) => line.split('|').slice(1, -1).map((cell) => cell.trim()))
+    .filter((cells) => cells[0] !== 'Понятие');
+    ;
+  assert.ok(rows.length >= 8, 'concept map should cover the core design ideas');
+  const sessionIds = new Set();
+  for (const file of fs.readdirSync(path.join(root, 'content/modules')).filter((name) => name.endsWith('.json'))) {
+    for (const session of JSON.parse(fs.readFileSync(path.join(root, 'content/modules', file), 'utf8')).sessions) sessionIds.add(session.id);
+  }
+  for (const [concept, introduced, rehearsed, transferred] of rows) {
+    assert.ok(concept && introduced && rehearsed && transferred, 'each concept needs three learning stages');
+    for (const id of [introduced, rehearsed, transferred]) assert.ok(sessionIds.has(id), concept + ' references unknown session ' + id);
+    assert.notEqual(introduced.split('-')[0], transferred.split('-')[0], concept + ' must transfer into a different module');
+  }
+});
+
+test('foundational_logo_terms_exist_in_the_glossary_with_valid_module_links', () => {
+  const { terms } = JSON.parse(fs.readFileSync(path.join(root, 'content/glossary.json'), 'utf8'));
+  const { modules } = JSON.parse(fs.readFileSync(path.join(root, 'content/modules.json'), 'utf8'));
+  const moduleIds = new Set(modules.map(({ id }) => id));
+  const required = ['Contrast', 'Monogram', 'Negative space', 'Optical correction', 'Semiotics', 'Wordmark'];
+  for (const label of required) assert.ok(terms.some(({ term }) => term.toLocaleLowerCase('en') === label.toLocaleLowerCase('en')), 'glossary needs ' + label);
+  for (const entry of terms) {
+    for (const key of ['term', 'translation', 'definition', 'modules']) assert.ok(entry[key], (entry.term ?? 'glossary entry') + ' needs ' + key);
+    assert.ok(Array.isArray(entry.modules) && entry.modules.length > 0, entry.term + ' needs one or more module links');
+    for (const id of entry.modules) assert.ok(moduleIds.has(id), entry.term + ' references unknown module ' + id);
+  }
+});
+
+test('logo_type_lesson_explains_tradeoffs_and_wordmark_relations', () => {
+  const typologies = moduleData('03-illustrator').sessions.find(({ id }) => id === '03-logo-typologies');
+  const wordmark = moduleData('03-illustrator').sessions.find(({ id }) => id === '03-wordmark-combination');
+  const typeText = textOf(typologies).toLocaleLowerCase('ru');
+  const wordmarkText = textOf(wordmark).toLocaleLowerCase('ru');
+  for (const term of ['огранич', 'риск', 'читаем', 'аудитор']) assert.ok(typeText.includes(term), 'logo typologies need a real trade-off: ' + term);
+  for (const term of ['кириллиц', 'негативн', 'монохром', 'уменьш']) assert.ok(wordmarkText.includes(term), 'wordmark lesson needs an observable test: ' + term);
+});
+
+
+test('brief_requirement_marks_include_text_labels_as_well_as_color', () => {
+  const brief = moduleData('01-brief').sessions.find(({ id }) => id === '01-brief-read');
+  assert.match(brief.guided_practice, /разными цветами/i);
+  assert.match(brief.guided_practice, /О\s*—\s*обязательное/i);
+  assert.match(brief.guided_practice, /П\s*—\s*пожелание/i);
+  assert.match(brief.guided_practice, /\?\s*—\s*неизвестное/i);
 });
