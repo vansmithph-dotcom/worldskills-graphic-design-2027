@@ -125,6 +125,137 @@ export function renderWorkedExample(parent, example, { eager = false } = {}) {
   return part;
 }
 
+function renderCaseField(parent, label, value) {
+  if (Array.isArray(value) ? value.length === 0 : !value) return;
+  const field = document.createElement('div');
+  field.className = 'case-study-field';
+  field.append(node('h5', label));
+  if (Array.isArray(value)) {
+    const list = document.createElement('ul');
+    value.forEach((item) => list.append(node('li', item)));
+    field.append(list);
+  } else field.append(node('p', value));
+  parent.append(field);
+}
+
+function renderCaseGroup(parent, title, fields) {
+  const group = document.createElement('section');
+  group.className = 'case-study-group';
+  group.append(node('h4', title));
+  fields.forEach(([label, value]) => renderCaseField(group, label, value));
+  parent.append(group);
+  return group;
+}
+
+export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
+  if (!caseStudy?.title) return null;
+  const card = document.createElement('section');
+  card.className = 'case-study';
+  if (caseStudy.status === 'training-simulation') {
+    card.append(node('p', 'Учебная симуляция · вымышленный заказ', 'case-study-status'));
+  }
+  card.append(node('h3', caseStudy.title));
+
+  const brief = caseStudy.brief ?? {};
+  renderCaseGroup(card, 'Бриф', [
+    ['Клиент', brief.client],
+    ['Аудитория', brief.audience],
+    ['Задача', brief.task],
+    ['Обязательное содержание', brief.required_content],
+    ['Что нужно сдать', brief.deliverables],
+    ['Ограничения учебного заказа', brief.constraints],
+    ['Что пока неизвестно', brief.unknowns],
+    ['Вопросы до начала работы', brief.questions]
+  ]);
+
+  const decisions = document.createElement('section');
+  decisions.className = 'case-study-group case-study-decisions';
+  decisions.append(node('h4', 'Ход решения и проверка'));
+  const decisionList = document.createElement('ol');
+  (caseStudy.decisions ?? []).forEach((decision) => {
+    const item = document.createElement('li');
+    item.className = 'case-study-decision';
+    item.append(node('h5', decision.stage));
+    renderCaseField(item, 'Выбор', decision.choice);
+    renderCaseField(item, 'Почему', decision.reason);
+    renderCaseField(item, 'Альтернатива', decision.alternative);
+    renderCaseField(item, 'Как проверить', decision.test);
+    renderCaseField(item, 'Что показала проверка', decision.result);
+    decisionList.append(item);
+  });
+  decisions.append(decisionList);
+  card.append(decisions);
+
+  renderCaseGroup(card, 'Пересмотр после проверки', [
+    ['Наблюдение', caseStudy.revision?.finding],
+    ['Изменение', caseStudy.revision?.change],
+    ['Результат повторной проверки', caseStudy.revision?.outcome]
+  ]);
+  renderCaseGroup(card, 'Итоговый комплект', [
+    ['Артефакт', caseStudy.final_output?.artifact],
+    ['Спецификация', caseStudy.final_output?.spec],
+    ['Файлы', caseStudy.final_output?.files],
+    ['Финальная проверка', caseStudy.final_output?.checks]
+  ]);
+
+  const reference = caseStudy.real_reference ?? {};
+  const source = sourceById.get(reference.source_id);
+  const sourceGroup = renderCaseGroup(card, 'Реальная опубликованная работа для сравнения', [
+    ['Что можно наблюдать на странице проекта', reference.observation],
+    ['Чего эта страница не подтверждает', reference.limit]
+  ]);
+  if (source) {
+    const citation = document.createElement('p');
+    citation.className = 'case-study-source';
+    const link = /^https:\/\//i.test(source.url ?? '') ? node('a', source.title) : node('strong', source.title);
+    if (link.tag === 'a') {
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noreferrer';
+    }
+    citation.append(link, node('span', `${source.publisher} · ${source.version}`, 'source-meta'));
+    sourceGroup.append(citation);
+  } else if (reference.source_id) {
+    sourceGroup.append(node('p', `Источник ${reference.source_id} не найден в каталоге курса.`, 'case-study-source-missing'));
+  }
+
+  if (caseStudy.image?.src) {
+    const figure = document.createElement('figure');
+    figure.className = 'case-study-figure';
+    const image = document.createElement('img');
+    image.src = caseStudy.image.src;
+    image.alt = caseStudy.image.alt ?? '';
+    image.loading = 'lazy';
+    figure.append(image);
+    if (caseStudy.image.caption) figure.append(node('figcaption', caseStudy.image.caption));
+    card.append(figure);
+  }
+
+  parent.append(card);
+  return card;
+}
+
+export function renderPracticeSteps(parent, title, steps = []) {
+  if (!Array.isArray(steps) || steps.length === 0) return null;
+  const sectionElement = document.createElement('section');
+  sectionElement.className = 'session-part practice-steps';
+  sectionElement.append(node('h3', title));
+  const list = document.createElement('ol');
+  list.className = 'practice-step-list';
+  steps.forEach((step, index) => {
+    const item = document.createElement('li');
+    item.className = 'practice-step';
+    item.append(node('h4', `Шаг ${index + 1} · ${step.minutes} мин`));
+    renderCaseField(item, 'Действие', step.action);
+    renderCaseField(item, 'Результат шага', step.output);
+    renderCaseField(item, 'Контрольная точка', step.checkpoint);
+    list.append(item);
+  });
+  sectionElement.append(list);
+  parent.append(sectionElement);
+  return sectionElement;
+}
+
 function renderAdaptation(parent, adaptation) {
   if (!adaptation?.trigger) return;
   const panel = document.createElement('section');
@@ -202,9 +333,11 @@ async function modulePage() {
       if (processVisual) card.append(processVisual);
 
       renderWorkedExample(card, session.worked_example);
-
-      section(card, 'Практика с опорой', session.guided_practice);
-      section(card, 'Самостоятельное задание', session.independent_brief);
+      renderCaseStudy(card, session.case_study, sourceById);
+      if (session.guided_steps?.length) renderPracticeSteps(card, 'Практика с опорой', session.guided_steps);
+      else section(card, 'Практика с опорой', session.guided_practice);
+      if (session.independent_steps?.length) renderPracticeSteps(card, 'Самостоятельное задание', session.independent_steps);
+      else section(card, 'Самостоятельное задание', session.independent_brief);
       renderSessionChallenge(card, session.challenge);
       if (session.criteria?.length) section(card, 'Критерии самопроверки', session.criteria);
       renderAdaptation(card, session.adaptation);
@@ -376,7 +509,11 @@ async function printPage() {
   const root = document.querySelector('#print-content');
   const paint = async () => {
     try {
-      const data = await json(`content/modules/${encodeURIComponent(select.value)}.json`);
+      const [data, sourceData] = await Promise.all([
+        json(`content/modules/${encodeURIComponent(select.value)}.json`),
+        json('content/sources.json')
+      ]);
+      const sourceById = new Map(sourceData.sources.map((source) => [source.id, source]));
       root.replaceChildren(node('h2', data.title), node('p', data.description));
       data.sessions?.forEach((session) => {
         const article = document.createElement('article');
@@ -388,8 +525,11 @@ async function printPage() {
         const processVisual = processFigure(session.process_visual, 'process-visual print-visual');
         if (processVisual) article.append(processVisual);
         renderWorkedExample(article, session.worked_example, { eager: true });
-        section(article, 'Практика с опорой', session.guided_practice);
-        section(article, 'Самостоятельное задание', session.independent_brief);
+        renderCaseStudy(article, session.case_study, sourceById);
+        if (session.guided_steps?.length) renderPracticeSteps(article, 'Практика с опорой', session.guided_steps);
+        else section(article, 'Практика с опорой', session.guided_practice);
+        if (session.independent_steps?.length) renderPracticeSteps(article, 'Самостоятельное задание', session.independent_steps);
+        else section(article, 'Самостоятельное задание', session.independent_brief);
         renderSessionChallenge(article, session.challenge);
         if (session.criteria?.length) section(article, 'Критерии самопроверки', session.criteria);
         if (session.common_errors?.length) section(article, 'Частые ошибки', session.common_errors);
