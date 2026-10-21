@@ -147,6 +147,24 @@ function renderCaseGroup(parent, title, fields) {
   return group;
 }
 
+function renderCaseOrderedList(parent, title, items = []) {
+  if (!Array.isArray(items) || items.length === 0) return null;
+  const field = document.createElement('div');
+  field.className = 'case-study-field';
+  field.append(node('h5', title));
+  const list = document.createElement('ol');
+  list.className = 'case-study-ordered-list';
+  items.forEach((item) => list.append(node('li', item)));
+  field.append(list);
+  parent.append(field);
+  return field;
+}
+
+function dimensionLabel(size, keys) {
+  if (!size || !keys.every((key) => Number.isFinite(size[key]))) return '';
+  return `${keys.map((key) => size[key]).join(' × ')} мм`;
+}
+
 export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
   if (!caseStudy?.title) return null;
   const card = document.createElement('section');
@@ -167,6 +185,73 @@ export function renderCaseStudy(parent, caseStudy, sourceById = new Map()) {
     ['Что пока неизвестно', brief.unknowns],
     ['Вопросы до начала работы', brief.questions]
   ]);
+
+  if (caseStudy.input_asset) {
+    const asset = caseStudy.input_asset;
+    renderCaseGroup(card, 'Локальный учебный исходник', [
+      ['Файл', asset.file],
+      ['Происхождение', asset.provenance],
+      ['Условия использования', asset.rights],
+      ['Размер исходника', asset.dimensions],
+      ['Назначение и ограничения', asset.intended_use]
+    ]);
+  }
+
+  if (caseStudy.supplier_spec) {
+    const spec = caseStudy.supplier_spec;
+    const panels = (spec.panels ?? []).map((panel) => `${panel.name}: ${panel.width_mm} мм`);
+    renderCaseGroup(card, 'Спецификация вымышленного поставщика', [
+      ['Статус условий', spec.status === 'fictional-training-spec' ? 'Только для этого учебного заказа; это не стандарт WorldSkills и не спецификация реальной типографии.' : spec.status],
+      ['Поставщик', spec.supplier],
+      ['Изделие', spec.product],
+      ['Размер готового изделия', dimensionLabel(spec.finished_size_mm, ['width', 'height', 'depth'])],
+      ['Размер плоской заготовки', dimensionLabel(spec.blank_mm, ['width', 'height'])],
+      ['Панели развёртки', panels],
+      ['Вылет за рез', Number.isFinite(spec.bleed_mm) ? `${spec.bleed_mm} мм` : ''],
+      ['Безопасная зона', Number.isFinite(spec.safe_zone_mm) ? `${spec.safe_zone_mm} мм` : ''],
+      ['Материал', spec.stock],
+      ['Формат печатного файла', spec.print_file],
+      ['Цветовой профиль', spec.colour_profile],
+      ['Страница и масштаб', spec.page_and_scale],
+      ['Служебные линии', spec.technical_lines],
+      ['Метки печати', spec.marks],
+      ['Что подтвердить перед реальной печатью', spec.confirmation]
+    ]);
+  }
+
+  if (caseStudy.dieline) {
+    const dieline = caseStudy.dieline;
+    const panelLabels = (dieline.panels ?? []).map((panel) => `${panel.name}: ${panel.width_mm} мм`);
+    renderCaseGroup(card, 'Развёртка и технические линии', [
+      ['Последовательность панелей', panelLabels],
+      ['Обозначение реза', dieline.line_legend?.cut],
+      ['Обозначение сгиба', dieline.line_legend?.fold],
+      ['Безопасное размещение текста', dieline.line_legend?.safe],
+      ['Область вылета', dieline.line_legend?.bleed]
+    ]);
+  }
+
+  if (caseStudy.prototype) {
+    const prototype = caseStudy.prototype;
+    renderCaseGroup(card, 'Физический прототип и пользовательская проверка', [
+      ['Масштаб сборки', Number.isFinite(prototype.scale) ? `1:${prototype.scale} (учебный масштаб)` : ''],
+      ['Материалы', prototype.materials],
+      ['Участники проверки', prototype.user_test?.participants ? `${prototype.user_test.participants.min}–${prototype.user_test.participants.max} человека` : ''],
+      ['Как наблюдать', prototype.user_test?.observation_method],
+      ['Пример наблюдения', prototype.sample_observation],
+      ['Правка и её причина', prototype.revision ? `${prototype.revision.change} ${prototype.revision.reason}` : ''],
+      ['Путь без принтера', prototype.fallback?.no_printer],
+      ['Путь без цветной печати', prototype.fallback?.colour_printing],
+      ['Ограничение чёрно-белой пробы', prototype.fallback?.colour_printing_limit]
+    ]);
+    const prototypeGroup = document.createElement('section');
+    prototypeGroup.className = 'case-study-group case-study-prototype';
+    prototypeGroup.append(node('h4', 'Сборка и повторная проверка'));
+    renderCaseOrderedList(prototypeGroup, 'Шаги сборки', prototype.assembly_steps);
+    renderCaseOrderedList(prototypeGroup, 'Задания участникам без подсказок', prototype.user_test?.prompts);
+    renderCaseOrderedList(prototypeGroup, 'Проверить при повторном тесте', prototype.retest?.checks);
+    card.append(prototypeGroup);
+  }
 
   const decisions = document.createElement('section');
   decisions.className = 'case-study-group case-study-decisions';

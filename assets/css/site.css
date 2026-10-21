@@ -40,8 +40,9 @@
 .case-study-group>h4{margin:0 0 10px;font-size:16px;line-height:1.35}
 .case-study-field{margin:0 0 10px}
 .case-study-field h5,.case-study-decision h5{margin:0 0 3px;font-size:13px;line-height:1.4}
-.case-study-field p,.case-study-field ul{margin:0;max-width:76ch;font-size:14px;line-height:1.5}
-.case-study-field ul{padding-left:1.25rem}
+.case-study-field p,.case-study-field ul,.case-study-field ol{margin:0;max-width:76ch;font-size:14px;line-height:1.5}
+.case-study-field ul,.case-study-field ol{padding-left:1.25rem}
+.case-study-field li{margin:.18rem 0}
 .case-study-decision{margin:0 0 12px;padding:14px;border-left:3px solid var(--blue);background:#f3f5f2;break-inside:avoid}
 .case-study-source{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:12px 0 0;font-size:14px}
 .case-study-source .source-meta{font-size:12px}
@@ -52,5 +53,5 @@
 .practice-step-list{display:grid;gap:10px;margin:0;padding:0;list-style:none;counter-reset:practice-step}
 .practice-step{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--white);break-inside:avoid}
 .practice-step h4{margin:0 0 9px;font-size:14px}
-@media(max-width:560px){.case-study{margin:18px 0;padding:15px}.case-study-source{display:block}.case-study-source .source-meta{display:block;margin-top:3px}.case-study-field p,.case-study-field ul{font-size:13px}}
-@media print{.case-study{padding:10px;margin:12px 0;border:1px solid #777;background:white;break-inside:auto}.case-study>h3{font-size:16pt}.case-study-status{padding:2px 6px;border:1px solid #555;background:white;font-size:9pt}.case-study-group{margin:10px 0;padding-top:7px}.case-study-group>h4{font-size:11pt}.case-study-field{margin-bottom:6px}.case-study-field h5,.case-study-decision h5{font-size:9pt}.case-study-field p,.case-study-field ul{font-size:9pt;line-height:1.35}.case-study-decision{padding:7px;border:1px solid #aaa;border-left:3px solid #333}.case-study-source{font-size:9pt}.case-study-figure{max-width:100%;margin:9px auto}.case-study-figure figcaption{font-size:8pt}.practice-steps{margin:10px 0}.practice-step-list{grid-template-columns:1fr;gap:6px}.practice-step{padding:8px;border:1px solid #999}.practice-step h4{font-size:10pt;margin-bottom:4px}.practice-step .case-study-field{margin-bottom:4px}}
+@media(max-width:560px){.case-study{margin:18px 0;padding:15px}.case-study-source{display:block}.case-study-source .source-meta{display:block;margin-top:3px}.case-study-field p,.case-study-field ul,.case-study-field ol{font-size:13px}}
+@media print{.case-study{padding:10px;margin:12px 0;border:1px solid #777;background:white;break-inside:auto}.case-study>h3{font-size:16pt}.case-study-status{padding:2px 6px;border:1px solid #555;background:white;font-size:9pt}.case-study-group{margin:10px 0;padding-top:7px}.case-study-group>h4{font-size:11pt}.case-study-field{margin-bottom:6px}.case-study-field h5,.case-study-decision h5{font-size:9pt}.case-study-field p,.case-study-field ul,.case-study-field ol{font-size:9pt;line-height:1.35}.case-study-decision{padding:7px;border:1px solid #aaa;border-left:3px solid #333}.case-study-source{font-size:9pt}.case-study-figure{max-width:100%;margin:9px auto}.case-study-figure figcaption{font-size:8pt}.practice-steps{margin:10px 0}.practice-step-list{grid-template-columns:1fr;gap:6px}.practice-step{padding:8px;border:1px solid #999}.practice-step h4{font-size:10pt;margin-bottom:4px}.practice-step .case-study-field{margin-bottom:4px}}

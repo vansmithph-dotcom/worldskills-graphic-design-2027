@@ -79,6 +79,52 @@ const completeCase = {
     src: 'assets/examples/identity-applications.svg',
     alt: 'Макет коробки, карточки безопасности и этикетки набора.',
     caption: 'Черновой комплект учебной мастерской.'
+  },
+  input_asset: {
+    file: 'assets/case-studies/linocut-stilllife.png',
+    provenance: 'Сгенерировано специально для курса.',
+    rights: 'Локальный учебный исходник; публичное использование требует проверки.',
+    dimensions: '1536 × 1024 px.',
+    intended_use: 'Учебная ретушь.'
+  },
+  supplier_spec: {
+    status: 'fictional-training-spec',
+    supplier: 'Типография «Пробный лист» — вымышленный поставщик.',
+    product: 'Рукав для учебной коробки.',
+    finished_size_mm: { width: 100, height: 65, depth: 25 },
+    blank_mm: { width: 262, height: 65 },
+    panels: [{ name: 'Лицевая панель', width_mm: 100 }, { name: 'Клеевой клапан', width_mm: 12 }],
+    bleed_mm: 3,
+    safe_zone_mm: 5,
+    stock: 'Картон 250 г/м².',
+    print_file: 'PDF/X-4.',
+    colour_profile: 'CMYK PSO Coated v3.',
+    page_and_scale: 'A4 landscape, 100%.',
+    technical_lines: 'Отдельный непечатаемый слой.',
+    marks: 'Не добавлять метки реза.',
+    confirmation: 'Перед печатью подтвердить реальные параметры у типографии.'
+  },
+  dieline: {
+    panels: [{ name: 'Лицевая панель', width_mm: 100 }, { name: 'Клеевой клапан', width_mm: 12 }],
+    line_legend: { cut: 'Сплошная линия — рез.', fold: 'Штриховая линия — сгиб.', safe: 'Текст держать внутри зоны.', bleed: 'Фон продолжается за край.' }
+  },
+  prototype: {
+    materials: ['Бумага A4', 'Линейка'],
+    scale: 1,
+    assembly_steps: ['Проверь масштаб.', 'Сложи стороны.', 'Замкни клапан.'],
+    user_test: {
+      participants: { min: 2, max: 3 },
+      prompts: ['Найди название.', 'Назови действие.'],
+      observation_method: 'Запиши слова без подсказок.'
+    },
+    sample_observation: 'Учебная симуляция: читатель не находит сгиб.',
+    revision: { change: 'Перенести знак.', reason: 'Сгиб перекрывает знак.' },
+    retest: { checks: ['Повторно найти знак.'] },
+    fallback: {
+      no_printer: 'Начертить на бумаге линейкой.',
+      colour_printing: 'Сделать монохромную пробу.',
+      colour_printing_limit: 'Цвет на бумаге не проверяется.'
+    }
   }
 };
 
@@ -133,6 +179,33 @@ test('case prose is inserted as text instead of interpreted as markup', () => {
     renderCaseStudy(parent, unsafeCase, new Map());
     assert.ok(flattenText(parent).includes(unsafeCase.brief.task));
     assert.equal(parent.children.some((child) => child.tag === 'img'), false);
+  });
+});
+
+test('case renderer includes local image rights, sample print specifications, dieline, and prototype steps', () => {
+  withFakeDocument(() => {
+    const parent = fakeElement('article');
+    renderCaseStudy(parent, completeCase, new Map());
+    const text = flattenText(parent);
+    for (const expected of [
+      'Локальный учебный исходник', completeCase.input_asset.file, completeCase.input_asset.provenance,
+      'Спецификация вымышленного поставщика', completeCase.supplier_spec.supplier,
+      'Только для этого учебного заказа', '100 × 65 × 25 мм', '262 × 65 мм',
+      ...completeCase.supplier_spec.panels.map((panel) => panel.name),
+      completeCase.supplier_spec.colour_profile, completeCase.supplier_spec.confirmation,
+      'Развёртка и технические линии', completeCase.dieline.line_legend.cut,
+      'Физический прототип и пользовательская проверка', ...completeCase.prototype.assembly_steps,
+      ...completeCase.prototype.user_test.prompts, completeCase.prototype.sample_observation,
+      completeCase.prototype.revision.change, ...completeCase.prototype.retest.checks,
+      completeCase.prototype.fallback.no_printer, completeCase.prototype.fallback.colour_printing_limit
+    ]) assert.ok(text.includes(expected), `rendered extension includes: ${expected}`);
+
+    const orderedLists = [];
+    (function collect(element) {
+      if (element.tag === 'ol') orderedLists.push(element);
+      (element.children ?? []).forEach(collect);
+    })(parent);
+    assert.ok(orderedLists.some((list) => list.children.length === completeCase.prototype.assembly_steps.length), 'prototype assembly steps stay ordered');
   });
 });
 
