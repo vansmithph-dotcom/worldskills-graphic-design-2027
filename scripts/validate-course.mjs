@@ -30,6 +30,119 @@ function readLocalTextFile(rootDir, relativePath) {
   }
 }
 
+function readLocalAsset(rootDir, relativePath) {
+  try {
+    const root = fs.realpathSync(rootDir);
+    const target = fs.realpathSync(path.resolve(root, relativePath));
+    const relativeTarget = path.relative(root, target);
+    if (relativeTarget === '..' || relativeTarget.startsWith(`..${path.sep}`) || path.isAbsolute(relativeTarget)) return { error: 'путь выходит за пределы проекта' };
+    if (!fs.statSync(target).isFile()) return { error: 'указанный путь не является файлом' };
+    return { buffer: fs.readFileSync(target), canonicalPath: target, extension: path.extname(target).toLowerCase() };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+function isText(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function validateTextList(value, minimum, label, sessionLabel, errors) {
+  if (!Array.isArray(value) || value.length < minimum || value.some((item) => !isText(item))) {
+    errors.push(`${sessionLabel}: ${label} должен содержать не менее ${minimum} непустых пунктов.`);
+    return false;
+  }
+  return true;
+}
+
+function validatePracticeSteps(steps, label, sessionLabel, errors) {
+  if (!Array.isArray(steps) || steps.length < 2) {
+    errors.push(`${sessionLabel}: ${label} должен содержать не менее двух шагов.`);
+    return 0;
+  }
+  let total = 0;
+  for (const [index, step] of steps.entries()) {
+    if (!step || typeof step !== 'object' || Array.isArray(step)) {
+      errors.push(`${sessionLabel}: ${label}[${index}] должен быть объектом.`);
+      continue;
+    }
+    for (const field of ['action', 'output', 'checkpoint']) if (!isText(step[field])) errors.push(`${sessionLabel}: отсутствует ${label}[${index}].${field}.`);
+    if (!Number.isInteger(step.minutes) || step.minutes <= 0) errors.push(`${sessionLabel}: ${label}[${index}].minutes должен быть положительным целым числом.`);
+    else total += step.minutes;
+  }
+  return total;
+}
+
+function validateCaseStudy(rootDir, session, moduleId, sessionLabel, sourceById, errors) {
+  const study = session.case_study;
+  if (!study || typeof study !== 'object' || Array.isArray(study)) {
+    errors.push(`${sessionLabel}: требуется самодостаточный case_study и тайминг практики.`);
+    return;
+  }
+  if (study.status !== 'training-simulation') errors.push(`${sessionLabel}: case_study.status должен помечать материал как training-simulation.`);
+  if (!isText(study.title)) errors.push(`${sessionLabel}: отсутствует case_study.title.`);
+
+  const brief = study.brief;
+  if (!brief || typeof brief !== 'object' || Array.isArray(brief)) errors.push(`${sessionLabel}: отсутствует case_study.brief.`);
+  else {
+    for (const field of ['client', 'audience', 'task']) if (!isText(brief[field])) errors.push(`${sessionLabel}: отсутствует case_study.brief.${field}.`);
+    for (const field of ['required_content', 'deliverables', 'constraints', 'unknowns', 'questions']) validateTextList(brief[field], 2, `case_study.brief.${field}`, sessionLabel, errors);
+  }
+
+  const decisions = study.decisions;
+  if (!Array.isArray(decisions) || decisions.length === 0) errors.push(`${sessionLabel}: case_study.decisions должен содержать хотя бы одно решение.`);
+  else for (const [index, decision] of decisions.entries()) {
+    const label = `case_study.decisions[${index}]`;
+    if (!decision || typeof decision !== 'object' || Array.isArray(decision)) {
+      errors.push(`${sessionLabel}: ${label} должен быть объектом.`);
+      continue;
+    }
+    for (const field of ['stage', 'choice', 'reason', 'alternative', 'test', 'result']) if (!isText(decision[field])) errors.push(`${sessionLabel}: отсутствует ${label}.${field}.`);
+    if (isText(decision.result) && !/учебная симуляция/i.test(decision.result)) errors.push(`${sessionLabel}: ${label}.result должен явно маркировать пример как учебную симуляцию.`);
+  }
+
+  const revision = study.revision;
+  if (!revision || typeof revision !== 'object' || Array.isArray(revision)) errors.push(`${sessionLabel}: отсутствует case_study.revision.`);
+  else {
+    for (const field of ['finding', 'change', 'outcome']) if (!isText(revision[field])) errors.push(`${sessionLabel}: отсутствует case_study.revision.${field}.`);
+    if (isText(revision.finding) && !/симулированное/i.test(revision.finding)) errors.push(`${sessionLabel}: case_study.revision.finding должен помечать вывод как симулированное наблюдение.`);
+  }
+
+  const output = study.final_output;
+  if (!output || typeof output !== 'object' || Array.isArray(output)) errors.push(`${sessionLabel}: отсутствует case_study.final_output.`);
+  else {
+    if (!isText(output.artifact)) errors.push(`${sessionLabel}: отсутствует case_study.final_output.artifact.`);
+    for (const field of ['spec', 'files', 'checks']) validateTextList(output[field], 2, `case_study.final_output.${field}`, sessionLabel, errors);
+  }
+
+  const reference = study.real_reference;
+  if (!reference || typeof reference !== 'object' || Array.isArray(reference)) errors.push(`${sessionLabel}: отсутствует case_study.real_reference.`);
+  else {
+    for (const field of ['source_id', 'observation', 'limit']) if (!isText(reference[field])) errors.push(`${sessionLabel}: отсутствует case_study.real_reference.${field}.`);
+    const source = sourceById.get(reference.source_id);
+    if (!source || source.status !== 'active') errors.push(`${sessionLabel}: источник кейса ${reference.source_id ?? '(пусто)'} отсутствует или не активен.`);
+    else {
+      if (!source.modules?.includes(moduleId)) errors.push(`${sessionLabel}: источник кейса ${reference.source_id} не привязан к модулю ${moduleId}.`);
+      if (!Array.isArray(session.sources) || !session.sources.includes(reference.source_id)) errors.push(`${sessionLabel}: источник кейса ${reference.source_id} должен присутствовать в sources занятия.`);
+      if (source.access === 'external' && !/^https:\/\//i.test(source.url ?? '')) errors.push(`${sessionLabel}: внешний источник кейса ${reference.source_id} должен использовать HTTPS.`);
+    }
+  }
+
+  const image = study.image;
+  if (!image || typeof image !== 'object' || Array.isArray(image) || !isText(image.src) || !isText(image.alt) || !isText(image.caption)) {
+    errors.push(`${sessionLabel}: case_study.image должен содержать src, alt и caption.`);
+  } else {
+    const imageAsset = readLocalAsset(rootDir, image.src);
+    if (imageAsset.error) errors.push(`${sessionLabel}: не найден визуальный кейс ${image.src}: ${imageAsset.error}.`);
+    else if (imageAsset.extension === '.svg') {
+      const svg = imageAsset.buffer.toString('utf8');
+      if (!/<title\b/i.test(svg) || !/<desc\b/i.test(svg)) errors.push(`${sessionLabel}: SVG кейса должен иметь доступные title и desc.`);
+    } else if (imageAsset.extension === '.png') {
+      if (imageAsset.buffer.length < 8 || !imageAsset.buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) errors.push(`${sessionLabel}: изображение кейса не является корректным PNG.`);
+    } else errors.push(`${sessionLabel}: визуал кейса должен быть локальным SVG или PNG.`);
+  }
+}
+
 export function validateCourse(rootDir, today = new Date()) {
   const errors = [];
   const warnings = [];
@@ -81,6 +194,9 @@ export function validateCourse(rootDir, today = new Date()) {
   }
   const sourceById = new Map((Array.isArray(sourcesDoc?.sources) ? sourcesDoc.sources : []).filter((source) => source && typeof source === 'object' && !Array.isArray(source)).map((source) => [source.id, source]));
   const sessionIds = new Set();
+  const caseTasks = new Map();
+  let guidedPracticeMinutes = 0;
+  let independentPracticeMinutes = 0;
   const moduleDir = path.join(rootDir, 'content/modules');
   let moduleFiles = [];
   try { moduleFiles = fs.readdirSync(moduleDir).filter((file) => file.endsWith('.json')); }
@@ -101,6 +217,7 @@ export function validateCourse(rootDir, today = new Date()) {
       }
       const sessionLabel = `${file}/${session.id ?? 'unknown-session'}`;
       if (session.id) sessionIds.add(session.id);
+      if (!Number.isInteger(session.minutes) || session.minutes <= 0) errors.push(`${sessionLabel}: minutes должен быть положительным целым числом.`);
       if (typeof session.goal !== 'string' || !session.goal.trim()) errors.push(`${sessionLabel}: требуется непустая цель занятия.`);
       if (typeof session.challenge !== 'string' || !session.challenge.trim()) errors.push(`${sessionLabel}: требуется непустое усложнение по желанию.`);
       const adaptation = session.adaptation;
@@ -141,6 +258,19 @@ export function validateCourse(rootDir, today = new Date()) {
           if (!/<title\b/i.test(svg) || !/<desc\b/i.test(svg)) errors.push(`${sessionLabel}: SVG примера должен иметь доступные title и desc.`);
         }
       }
+      validateCaseStudy(rootDir, session, data.id, sessionLabel, sourceById, errors);
+      const caseTask = session.case_study?.brief?.task;
+      if (isText(caseTask)) {
+        if (caseTasks.has(caseTask)) errors.push(`${sessionLabel}: case_study.brief.task повторяет задание ${caseTasks.get(caseTask)}.`);
+        else caseTasks.set(caseTask, session.id ?? sessionLabel);
+      }
+      const guidedSteps = validatePracticeSteps(session.guided_steps, 'guided_steps', sessionLabel, errors);
+      const independentSteps = validatePracticeSteps(session.independent_steps, 'independent_steps', sessionLabel, errors);
+      guidedPracticeMinutes += guidedSteps;
+      independentPracticeMinutes += independentSteps;
+      if (Number.isInteger(session.minutes) && guidedSteps + independentSteps !== session.minutes) errors.push(`${sessionLabel}: минуты guided_steps и independent_steps суммируются в ${guidedSteps + independentSteps}, а занятие указано как ${session.minutes}.`);
+      if (timeline && guidedPracticeMinutes > timeline.guidedHours * 60) errors.push(`${sessionLabel}: короткая практика превышает распределение занятий и практики с преподавателем (${timeline.guidedHours} часов).`);
+      if (timeline && independentPracticeMinutes > timeline.selfStudyHours * 60) errors.push(`${sessionLabel}: короткая самостоятельная практика превышает выделенные ${timeline.selfStudyHours} часов.`);
     }
   }
   if (!Array.isArray(glossary?.terms) || glossary.terms.length === 0) errors.push('content/glossary.json: требуется непустой массив terms.');
@@ -188,6 +318,23 @@ export function validateCourse(rootDir, today = new Date()) {
     if (phases.at(-1)?.endDate !== '2027-01-31' || timeline.firstPhaseEnd !== '2027-01-31') errors.push('Первый маршрут завершается 31 января 2027 года.');
     if (!timeline.postPublication?.trigger || !timeline.postPublication?.week1 || !timeline.postPublication?.weeks2to4 || !timeline.postPublication?.untilContest) errors.push('Постпубликационный этап требует событийного плана.');
     if ('date' in (timeline.postPublication ?? {}) || 'startDate' in (timeline.postPublication ?? {})) errors.push('Для этапа после публикации нельзя заранее задавать календарную дату.');
+    const timedPractice = timeline.timedPractice;
+    const guidedLimit = timeline.guidedHours * 60;
+    const independentLimit = timeline.selfStudyHours * 60;
+    const expectedAccounting = {
+      guidedMinutes: guidedPracticeMinutes,
+      independentMinutes: independentPracticeMinutes,
+      totalMinutes: guidedPracticeMinutes + independentPracticeMinutes,
+      guidedRemainingMinutes: guidedLimit - guidedPracticeMinutes,
+      independentRemainingMinutes: independentLimit - independentPracticeMinutes,
+      remainingMinutes: guidedLimit + independentLimit - guidedPracticeMinutes - independentPracticeMinutes
+    };
+    if (!timedPractice || typeof timedPractice !== 'object' || Array.isArray(timedPractice)) errors.push('content/timeline.json: требуется учёт таймингов занятий внутри общей нагрузки.');
+    else {
+      for (const [field, expected] of Object.entries(expectedAccounting)) if (timedPractice[field] !== expected) errors.push(`content/timeline.json: timedPractice.${field} должен быть ${expected}.`);
+      if (timedPractice.includedInCourseHours !== true) errors.push('content/timeline.json: тайминги занятий должны быть включены в 228 часов курса.');
+      for (const field of ['guided', 'independent']) if (!Array.isArray(timedPractice.remainingUse?.[field]) || timedPractice.remainingUse[field].length < 2 || timedPractice.remainingUse[field].some((item) => !isText(item))) errors.push(`content/timeline.json: timedPractice.remainingUse.${field} должен объяснять использование оставшегося времени.`);
+    }
   }
   return { errors, warnings };
 }

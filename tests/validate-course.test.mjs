@@ -175,6 +175,74 @@ test('validator requires a separate image for each worked example and process di
   assert.ok(errors.some((message) => message.includes(module.sessions[0].id) && message.includes('отличаться от схемы процесса')));
 });
 
+test('validator requires a self-contained case and timed practice for all 28 sessions', (t) => {
+  const root = courseFixture(t);
+  const sessions = [];
+  for (const file of moduleFiles(root)) {
+    const relative = `content/modules/${file}`;
+    const module = readJson(root, relative);
+    for (const session of module.sessions) {
+      sessions.push(session);
+      session.case_study = null;
+    }
+    writeJson(root, relative, module);
+  }
+  assert.equal(sessions.length, 28);
+  const { errors } = validateCourse(root, '2026-10-21');
+  assertSessionErrors(errors, sessions, 'case_study');
+});
+
+test('validator reports broken case fields, references, images and timed steps against the session ID', (t) => {
+  const cases = [
+    { label: 'brief task', mutate(session) { session.case_study.brief.task = ''; }, expected: 'brief.task' },
+    { label: 'case reference', mutate(session) { session.case_study.real_reference.source_id = 'missing-source'; }, expected: 'missing-source' },
+    { label: 'case image', mutate(session) { session.case_study.image.src = 'assets/case-studies/missing.svg'; }, expected: 'missing.svg' },
+    { label: 'guided duration', mutate(session) { session.guided_steps[0].minutes = 0; }, expected: 'guided_steps[0].minutes' },
+    { label: 'practice total', mutate(session) { session.independent_steps[0].minutes += 1; }, expected: 'суммируются' }
+  ];
+  for (const entry of cases) {
+    const root = courseFixture(t);
+    const relative = 'content/modules/01-brief.json';
+    const module = readJson(root, relative);
+    const session = module.sessions[0];
+    entry.mutate(session);
+    writeJson(root, relative, module);
+    const { errors } = validateCourse(root, '2026-10-21');
+    assert.ok(errors.some((message) => message.includes(session.id) && message.includes(entry.expected)), `${entry.label} identifies ${session.id} and ${entry.expected}`);
+  }
+});
+
+test('validator keeps timed case practice inside the 168/60 hour allocations', (t) => {
+  const root = courseFixture(t);
+  const relative = 'content/modules/01-brief.json';
+  const module = readJson(root, relative);
+  const session = module.sessions[0];
+  session.guided_steps[0].minutes = 100000;
+  session.minutes += 100000 - session.guided_steps.reduce((sum, step) => sum + step.minutes, 0) - session.independent_steps.reduce((sum, step) => sum + step.minutes, 0);
+  writeJson(root, relative, module);
+  const { errors } = validateCourse(root, '2026-10-21');
+  assert.ok(errors.some((message) => message.includes(session.id) && /168|guided.*allocat|guided.*час/i.test(message)));
+});
+
+test('timeline publishes the computed case-practice minutes and accounts for remaining course hours', (t) => {
+  const root = courseFixture(t);
+  const timeline = readJson(root, 'content/timeline.json');
+  const totals = timeline.timedPractice;
+  assert.deepEqual(totals, {
+    guidedMinutes: 404,
+    independentMinutes: 283,
+    totalMinutes: 687,
+    guidedRemainingMinutes: 9676,
+    independentRemainingMinutes: 3317,
+    remainingMinutes: 12993,
+    includedInCourseHours: true,
+    remainingUse: {
+      guided: ['расширенная практика', 'разбор работ и обратная связь', 'циклы исправления и повторной проверки', 'длинные задания и учебные симуляции'],
+      independent: ['завершение проектов', 'повторение с новым брифом', 'офлайн-проверки и портфолио', 'подготовка английского объяснения']
+    }
+  });
+});
+
 test('validator detects process-image aliases that resolve to the same file', (t) => {
   const root = courseFixture(t);
   const relative = 'content/modules/01-brief.json';

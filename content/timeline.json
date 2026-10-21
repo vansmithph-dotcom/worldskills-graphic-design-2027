@@ -4,6 +4,19 @@
   "totalHours": 228,
   "guidedHours": 168,
   "selfStudyHours": 60,
+  "timedPractice": {
+    "guidedMinutes": 404,
+    "independentMinutes": 283,
+    "totalMinutes": 687,
+    "guidedRemainingMinutes": 9676,
+    "independentRemainingMinutes": 3317,
+    "remainingMinutes": 12993,
+    "includedInCourseHours": true,
+    "remainingUse": {
+      "guided": ["расширенная практика", "разбор работ и обратная связь", "циклы исправления и повторной проверки", "длинные задания и учебные симуляции"],
+      "independent": ["завершение проектов", "повторение с новым брифом", "офлайн-проверки и портфолио", "подготовка английского объяснения"]
+    }
+  },
   "basisLabel": "Предварительный маршрут по материалам 2026 года; сверить после официальной публикации Almaty 2027",
   "phases": [
     {"id":"2026-10","label":"20–31 октября 2026","startDate":"2026-10-20","endDate":"2026-10-31","totalHours":32,"guidedHours":24,"selfStudyHours":8,"focus":"Входная диагностика, организация файлов и резервных копий, чтение брифа, композиция и типографика, первое знакомство с InDesign.","checkpoint":"Карта стартовых навыков, настроенная рабочая папка, разобранный бриф и тестовая страница."},
